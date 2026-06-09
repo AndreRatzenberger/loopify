@@ -38,6 +38,28 @@ Or as Caveman Codex would say:
 
 **1. Install the loop machine**
 
+Codex CLI:
+
+```bash
+codex plugin marketplace add AndreRatzenberger/loopify
+codex plugin add loopify-agent-skills@loopify
+```
+
+Or browse it interactively:
+
+```text
+codex
+/plugins
+```
+
+In the Codex app or desktop surface, open **Plugins**, search for Loopify, then
+choose **Add to Codex** / **Install plugin**. If Loopify is not visible yet, add
+the marketplace from the CLI command above, restart or refresh Codex, and check
+the marketplace list again. Shared workspace installs can also appear under
+**Shared with you**.
+
+Older slash-command plugin surfaces may use:
+
 ```text
 /plugin marketplace add AndreRatzenberger/loopify
 /plugin install loopify-agent-skills@loopify
