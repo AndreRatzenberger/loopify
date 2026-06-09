@@ -26,3 +26,10 @@
 - Patch: reduced gap spacing
 - Why this patch: suspected layout spacing
 - Next check: rerun Playwright mobile test
+
+## Final
+
+- Stop reason: blocked
+- Passing command: none
+- Evidence: same mobile overflow failure repeated after three layout-only patches
+- Remaining caveats: root overflowing element has not been identified

@@ -2,14 +2,81 @@
 
 Loopify should help agents name loop failures explicitly.
 
-- token fire: no budget or stop rule
-- doom loop: repeated attempts without meaningful new evidence
-- weak evaluator: checker shares the generator's blind spot
-- fake green check: passing command does not cover the requirement
-- benchmark overfit: loop optimizes a narrow metric while damaging broader quality
-- authority creep: loop silently widens what it may change
-- missing context: loop repairs from incomplete evidence
-- moving target spec: requirements shift without contract updates
-- hidden subjective requirement: taste words masquerade as automated proof
-- favorite-frame overfitting: loop polishes the first interpretation
-- silent harness mutation: loop changes its own future behavior without review
+## Token Fire
+
+The loop spends tokens or time without a meaningful state change.
+
+Mitigations: cap turns/cost, run cheap checks first, summarize bulky outputs,
+prefer event triggers over polling, and stop when nothing changed.
+
+## Doom Loop
+
+The loop repeats the same repair against the same failure.
+
+Mitigations: track failure signatures, force a new hypothesis after N attempts,
+change the diagnostic, or escalate.
+
+## Weak Evaluator
+
+The evaluator shares the generator's blind spot, so the loop converges to
+plausible garbage.
+
+Mitigations: use deterministic checks where possible, add independent review,
+and record residual risk.
+
+## Fake Green Check
+
+A command passes but does not cover the requirement being claimed.
+
+Mitigations: map each requirement to evidence and state exactly what each check
+does not prove.
+
+## Benchmark Overfit
+
+The loop optimizes the visible metric while damaging the real task.
+
+Mitigations: held-out cases, adversarial review, metric scope notes, and
+manual acceptance for broad quality claims.
+
+## Authority Creep
+
+The loop silently widens what it may change, call, publish, or spend.
+
+Mitigations: allowed/denied paths, per-risk approvals, rollback plans, and
+explicit escalation when a needed action is out of bounds.
+
+## Missing Context
+
+The loop patches from incomplete evidence.
+
+Mitigations: inspect the relevant files/logs/rendered surface before patching
+and include the new evidence in the trace.
+
+## Moving Target Spec
+
+Requirements shift while the loop keeps running.
+
+Mitigations: pause, update the Loop Contract, reset evidence expectations, and
+record the decision.
+
+## Hidden Subjective Requirement
+
+Taste words masquerade as automated proof.
+
+Mitigations: split the checkable parts from manual/visual judgment.
+
+## Favorite-Frame Overfitting
+
+The loop polishes its first interpretation instead of testing whether that
+interpretation is wrong.
+
+Mitigations: contradiction passes, alternate-frame review, and explicit
+uncertainty notes.
+
+## Silent Harness Mutation
+
+The loop changes its own prompts, checks, tools, context builder, permissions,
+or memory without approval.
+
+Mitigations: harness-change contracts, review gates, rollback plans, and
+recorded approvals.
