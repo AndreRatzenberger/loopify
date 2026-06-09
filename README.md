@@ -141,18 +141,13 @@ folder." Without that phrase, it stays pure and writes only the Loop Contract.
 
 Prompts still matter. They are no longer the unit of done.
 
-Tiny Twitter bite: when someone says "LLMs are not intelligent enough for
-loops," ask which loop they mean.
+We don't do scary loops here. Just wholesome bounded loops.
 
 The scary loop is unbounded: the model invents goals, judges itself, mutates
 its own harness, and ships when it feels done. Loopify is the boring loop: a
 contract, allowed actions, checks, budgets, trace, and stop reasons. It does
 not ask the model to become wise. It makes the model bump into reality more
 often.
-
-If a dunk treats those as the same thing, it is not arguing with Loopify. It is
-arguing with a monster made out of the word "loop." Define the harness, then
-tweet.
 
 ---
 
