@@ -24,6 +24,14 @@ a reason.
 Think of it as **promptcraft with receipts**. Tiny bureaucracy for ambitious
 agents. The kind where "done" has to show its work.
 
+Or as Caveman Codex would say:
+
+> Spec alone: "Want fire."
+>
+> Prompt alone: "Please make fire."
+>
+> Loop: "Try make fire. Check smoke. If hand burns, stop. Write what happened."
+
 ---
 
 ## ⚡ Quick Loop
@@ -99,12 +107,25 @@ folder." Without that phrase, it stays pure and writes only the Loop Contract.
   <img alt="Prompt, spec, and loop comparison" src="docs/assets/spec-vs-loop.svg" width="900">
 </p>
 
-**Prompt**: ask once and hope.
-**Spec**: describe the desired end state.
-**Loop**: check reality against the contract until the work earns a stop
-reason.
+- **Prompt**: ask once and hope.
+- **Spec**: describe the desired end state.
+- **Loop**: check reality against the contract until the work earns a stop
+  reason.
 
 Prompts still matter. They are no longer the unit of done.
+
+Tiny Twitter bite: when someone says "LLMs are not intelligent enough for
+loops," ask which loop they mean.
+
+The scary loop is unbounded: the model invents goals, judges itself, mutates
+its own harness, and ships when it feels done. Loopify is the boring loop: a
+contract, allowed actions, checks, budgets, trace, and stop reasons. It does
+not ask the model to become wise. It makes the model bump into reality more
+often.
+
+If a dunk treats those as the same thing, it is not arguing with Loopify. It is
+arguing with a monster made out of the word "loop." Define the harness, then
+tweet.
 
 ---
 
