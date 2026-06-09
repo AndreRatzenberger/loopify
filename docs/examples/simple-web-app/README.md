@@ -6,6 +6,9 @@ Files:
 
 - `spec.md`: prose source spec.
 - `expected-loop-contract.md`: the target shape a good contract should resemble.
+- `example-loop/`: a completed disposable loop run, including the final app
+  snapshot, tests, trace, final report, and the interesting failures observed
+  along the way.
 
 What this example teaches:
 
@@ -13,3 +16,5 @@ What this example teaches:
 - Mobile viewport support is not proven by a build alone.
 - The contract should name Playwright checks and manual polish review
   separately.
+- A useful loop trace preserves mundane failures, environment failures, and
+  visual-review catches instead of smoothing them into a fake straight line.

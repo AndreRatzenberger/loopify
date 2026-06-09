@@ -1,0 +1,14 @@
+{
+  "name": "loopify-simple-web-app-e2e",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build-check.mjs",
+    "test": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.57.0",
+    "http-server": "14.1.1"
+  }
+}

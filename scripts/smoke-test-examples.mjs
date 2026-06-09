@@ -3,6 +3,19 @@ import { existsSync, readFileSync } from "node:fs";
 const required = [
   "docs/examples/simple-web-app/spec.md",
   "docs/examples/simple-web-app/expected-loop-contract.md",
+  "docs/examples/simple-web-app/example-loop/README.md",
+  "docs/examples/simple-web-app/example-loop/repo/package.json",
+  "docs/examples/simple-web-app/example-loop/repo/index.html",
+  "docs/examples/simple-web-app/example-loop/repo/src/app.js",
+  "docs/examples/simple-web-app/example-loop/repo/src/styles.css",
+  "docs/examples/simple-web-app/example-loop/repo/tests/tiny-events.spec.mjs",
+  "docs/examples/simple-web-app/example-loop/repo/.loopify/index.md",
+  "docs/examples/simple-web-app/example-loop/repo/.loopify/loops/001-tiny-events/source.md",
+  "docs/examples/simple-web-app/example-loop/repo/.loopify/loops/001-tiny-events/loop-contract.md",
+  "docs/examples/simple-web-app/example-loop/repo/.loopify/loops/001-tiny-events/quality-gate.sh",
+  "docs/examples/simple-web-app/example-loop/repo/.loopify/loops/001-tiny-events/trace.md",
+  "docs/examples/simple-web-app/example-loop/repo/.loopify/loops/001-tiny-events/final-report.md",
+  "docs/examples/simple-web-app/example-loop/repo/.loopify/loops/001-tiny-events/artifacts/visual-review.md",
   "docs/examples/markdown-research-note/spec.md",
   "docs/examples/markdown-research-note/expected-loop-contract.md",
   "docs/examples/stuck-loop-debug/trace.md",
@@ -52,6 +65,7 @@ const headings = [
 
 for (const path of [
   "docs/examples/simple-web-app/expected-loop-contract.md",
+  "docs/examples/simple-web-app/example-loop/repo/.loopify/loops/001-tiny-events/loop-contract.md",
   "docs/examples/markdown-research-note/expected-loop-contract.md",
   "docs/examples/papertrail/loop-contract.md",
   "docs/examples/loop-directory/.loopify/loops/001-tiny-events/loop-contract.md",
@@ -69,6 +83,31 @@ const loopIndex = readFileSync("docs/examples/loop-directory/.loopify/index.md",
 for (const phrase of ["001", "tiny-events", "planned"]) {
   if (!loopIndex.includes(phrase)) {
     throw new Error(`loop-directory index missing ${phrase}`);
+  }
+}
+
+const exampleLoopTrace = readFileSync(
+  "docs/examples/simple-web-app/example-loop/repo/.loopify/loops/001-tiny-events/trace.md",
+  "utf8",
+);
+for (const phrase of [
+  "Missing required app file: index.html",
+  "Chromium",
+  "visual review found awkward desktop wrapping",
+  "Stop reason: success",
+]) {
+  if (!exampleLoopTrace.includes(phrase)) {
+    throw new Error(`simple-web-app example loop trace missing ${phrase}`);
+  }
+}
+
+const visualReview = readFileSync(
+  "docs/examples/simple-web-app/example-loop/repo/.loopify/loops/001-tiny-events/artifacts/visual-review.md",
+  "utf8",
+);
+for (const phrase of ["Before Patch", "After Patch", "quality gate still passes"]) {
+  if (!visualReview.includes(phrase)) {
+    throw new Error(`simple-web-app visual artifact missing ${phrase}`);
   }
 }
 

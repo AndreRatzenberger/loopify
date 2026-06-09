@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tiny Events Board</title>
+    <link rel="stylesheet" href="src/styles.css">
+  </head>
+  <body>
+    <main id="app" class="shell">
+      <header class="header">
+        <p class="eyebrow">Local picks</p>
+        <h1>Tiny Events Board</h1>
+        <p class="lede">Find a small thing worth leaving the house for.</p>
+      </header>
+
+      <section class="toolbar" aria-label="Event filters">
+        <label for="category">Category</label>
+        <select id="category" name="category">
+          <option value="all">All events</option>
+          <option value="workshop">Workshops</option>
+          <option value="outdoors">Outdoors</option>
+          <option value="community">Community</option>
+        </select>
+        <p id="favorite-status" role="status" aria-live="polite">Saved 0 favorites</p>
+      </section>
+
+      <section id="events" class="event-grid" aria-label="Events"></section>
+    </main>
+
+    <script type="module" src="src/app.js"></script>
+  </body>
+</html>
