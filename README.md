@@ -10,7 +10,7 @@
 </p>
 
 <p align="center">
-  <em>"Stop prompting once. Start looping until reality agrees."</em>
+  <em>"Loop yes. Prompt no" - Caveman Codex 06/2026</em>
 </p>
 
 
