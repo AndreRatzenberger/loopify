@@ -1,122 +1,265 @@
-# Loopify
+<p align="center">
+  <img alt="Loopify Banner" src="docs/assets/loopify-banner.png" width="900">
+</p>
 
-Loopify is a Claude plugin-format skill bundle for turning specs into
-executable feedback loops.
+<p align="center">
+  <a href="https://github.com/AndreRatzenberger/loopify"><img src="https://img.shields.io/badge/Claude-plugin-24e2ff.svg" alt="Claude plugin"></a>
+  <a href="https://github.com/AndreRatzenberger/loopify"><img src="https://img.shields.io/badge/skills-11-56ffd0.svg" alt="11 skills"></a>
+  <a href="https://github.com/AndreRatzenberger/loopify"><img src="https://img.shields.io/badge/quality-passing-brightgreen.svg" alt="Quality passing"></a>
+  <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a>
+</p>
 
-A prompt asks for an answer. A loop defines how the system keeps checking,
-repairing, and stopping until reality matches the contract.
+<p align="center">
+  <em>"Stop prompting once. Start looping until reality agrees."</em>
+</p>
 
-Loopify helps agents and humans move from:
 
-```text
-prompt once -> hope the result is good
-```
+Stop writing heroic prompts. Start writing contracts reality can check.
 
-to:
+**Loopify** is a Claude plugin-format skill bundle for turning specs into
+executable feedback loops. A prompt asks for an answer. A loop defines how the
+system keeps checking, repairing, and stopping until reality matches the
+contract.
 
-```text
-spec -> loop contract -> checks -> attempts -> trace -> stop reason
-```
+Think of it as **promptcraft with receipts**. The kind where "done" has to show
+its work.
 
-## Why Loops
+---
 
-Prompts are still useful, but they are a weak unit of work for anything that
-needs proof. A prompt can describe a desired answer. A loop names the feedback
-system that decides whether another attempt is earned.
+## ⚡ Quick Loop
 
-A spec says what should be true. A Loop Contract says what evidence would prove
-it, which checks should run, what the agent may change, how retries work, when
-to stop, and what trace must be left behind.
-
-## Workflow
-
-```text
-spec
-  -> loopify-spec
-  -> loop-contract.md
-  -> loopify-bootstrap
-  -> checks + trace + quality gate
-  -> loopify-run
-  -> done / blocked / escalated
-  -> loopify-retro
-```
-
-Use the smallest loop that fits. Simple work can stay a prompt. Repeated,
-high-stakes, long-running, or hard-to-review work should have a contract,
-checks, authority boundaries, and receipts.
-
-## Install
+**1. Install the loop machine**
 
 ```text
 /plugin marketplace add AndreRatzenberger/loopify
 /plugin install loopify-agent-skills@loopify
 ```
 
-## Skills
+**2. Turn a spec into a contract**
 
-| Skill | Purpose |
+```text
+Use loopify-spec on docs/goals/goal.md and write docs/loop-contract.md.
+```
+
+**3. Bootstrap the repo**
+
+```text
+Use loopify-bootstrap with docs/loop-contract.md.
+```
+
+**4. Run until the loop earns a stop reason**
+
+```text
+Use loopify-run on docs/loop-contract.md. Stop only with success, blocked, escalated, or budget-exhausted.
+```
+
+**What just happened?**
+
+- **The spec** said what should become true.
+- **The Loop Contract** named evidence, checks, authority, retries, and stop
+  rules.
+- **The run** checked reality, patched from feedback, wrote a trace, and stopped
+  with receipts.
+
+It's like having an agent that can be ambitious without becoming slippery. 🧾
+
+---
+
+## 🔁 Prompt vs Spec vs Loop
+
+<p align="center">
+  <img alt="Prompt, spec, and loop comparison" src="docs/assets/spec-vs-loop.svg" width="900">
+</p>
+
+**Prompt**: ask once and hope.
+**Spec**: describe the desired end state.
+**Loop**: keep checking reality against the contract until the work earns a
+stop reason.
+
+The important move is not "prompts are dead." Prompts still live inside the
+system. The unit of work moves from the prompt to the loop.
+
+---
+
+## 📜 Loop Contract: The Deal Reality Can Check
+
+<p align="center">
+  <img alt="Loop Contract anatomy" src="docs/assets/loop-contract-anatomy.svg" width="900">
+</p>
+
+A Loop Contract answers the questions a one-shot prompt usually hand-waves:
+
+- **Goal**: what output or state counts?
+- **Evidence**: what proves progress?
+- **Authority**: what may the loop read, write, call, spend, or publish?
+- **Checks**: which commands, tests, screenshots, or reviews count?
+- **Budget**: how many turns, retries, minutes, or dollars are allowed?
+- **Stop**: what ends in success, blocked, escalated, or budget-exhausted?
+- **Trace**: what receipt does the loop leave behind?
+
+Without those, "looping" is just burning tokens while the model chases its own
+reflection. Very cyberpunk. Not very useful.
+
+---
+
+## 🧰 The Skill Chest
+
+Loopify ships 11 skills. The core spine is:
+
+```text
+loopify-spec -> loopify-bootstrap -> loopify-run -> loopify-trace
+```
+
+| Skill | What it does |
 | --- | --- |
-| `loopify-spec` | Convert a prose spec into a Loop Contract. |
-| `loopify-bootstrap` | Seed a repo with loop materials, quality gate, and trace template. |
-| `loopify-run` | Execute a Loop Contract by checking, patching, rerunning, and tracing. |
-| `loopify-checks` | Turn vague requirements into concrete checks and review gates. |
-| `loopify-trace` | Maintain loop receipts and final evidence summaries. |
-| `loopify-review` | Audit Loop Contracts, traces, evidence, and authority boundaries. |
-| `loopify-debug` | Diagnose stuck loops and choose recovery paths. |
-| `loopify-demo` | Create demo-ready loop seed projects. |
-| `loopify-codex-sdk` | Add Codex SDK scripts or templates as loop actuators. |
-| `loopify-retro` | Extract reusable lessons from completed loops. |
-| `loopify-governance` | Add budgets, approvals, rollback, and authority boundaries. |
+| `loopify-spec` | Converts prose specs into Loop Contracts. |
+| `loopify-bootstrap` | Seeds goal prompts, quality gates, traces, and checklists. |
+| `loopify-run` | Executes a contract by checking, patching, rerunning, and tracing. |
+| `loopify-checks` | Turns vague requirements into honest evidence. |
+| `loopify-trace` | Keeps receipts across attempts. |
+| `loopify-review` | Audits contracts, traces, done claims, and residual risk. |
+| `loopify-debug` | Rescues stuck loops before they become doom spirals. |
+| `loopify-demo` | Builds public-safe demo material packs. |
+| `loopify-codex-sdk` | Treats Codex SDK calls as actuators inside a larger loop. |
+| `loopify-retro` | Turns one loop's failures into better future loops. |
+| `loopify-governance` | Adds budgets, approvals, rollback, and authority boundaries. |
 
-## Use With A Future `/goal`
+Each skill keeps its `SKILL.md` lean. Deeper guidance lives in `references/`;
+copyable output shapes live in `templates/`; deterministic helpers live in
+`scripts/`.
 
-For a repo that already has a contract:
+---
+
+## 🧪 Try the PaperTrail Stress Fixture
+
+The repo includes a deliberately chunky app request:
 
 ```text
-/goal Read docs/loop-contract.md and run loopify-run until success, blocked, escalated, or budget-exhausted.
+docs/goals/prompt.md
 ```
 
-For a prose-heavy goal:
+It asks for a research-paper catalog with arXiv ingestion, GraphRAG, fallbacks,
+logging, four views, and mandatory Playwright testing. In other words: exactly
+the kind of spec that should not be trusted to a one-shot prompt.
+
+Try:
 
 ```text
-Use loopify-spec on docs/goals/goal.md, write docs/loop-contract.md, then use loopify-bootstrap to seed checks and trace files.
+Use loopify-spec on docs/goals/prompt.md and write docs/examples/papertrail/loop-contract.md.
 ```
 
-The contract is the bridge. The `/goal` prompt should point at the contract and
-quality gate instead of restating the whole project in chat.
+Then inspect:
 
-## Examples
+```text
+docs/examples/papertrail/loop-contract.md
+```
 
-- `docs/examples/simple-web-app/` maps a tiny UI spec to build and Playwright
-  checks.
-- `docs/examples/markdown-research-note/` maps a research-note cleanup spec to
-  source and uncertainty checks.
-- `docs/examples/stuck-loop-debug/` shows repeated failure diagnosis.
-- `docs/examples/papertrail/loop-contract.md` is a larger stress fixture
-  generated from `docs/goals/prompt.md`.
+If the contract maps requirements to evidence, names manual review, and refuses
+to pretend taste is a unit test, the loop is doing its job.
 
-## Validate
+---
+
+## 🛡️ Stop Rules: Loopify Isn't That Reckless
+
+Every loop stops with one of four reasons:
+
+- `success`: the checks pass and manual/visual gates are satisfied or queued.
+- `blocked`: the same blocker repeats or a required dependency is unavailable.
+- `escalated`: a human decision is required.
+- `budget-exhausted`: the contract's turn, time, retry, or cost budget is done.
+
+This matters. A loop without stop rules is not autonomy. It's a very expensive
+while-loop with vibes.
+
+---
+
+## 🧬 Codex SDK: The Actuator, Not the Whole Creature
+
+`loopify-codex-sdk` can help scaffold repair, review, evaluator, context-builder,
+or trace-summarizer actuators.
+
+But the SDK call is not the loop. The loop still owns:
+
+- state
+- checks
+- authority
+- budgets
+- stop rules
+- trace
+- review
+
+Concrete SDK calls are intentionally template-based until current official SDK
+docs are checked in the consuming project. No fake APIs. No confidence cosplay.
+
+---
+
+## 💻 Development: Working With This Repo
+
+Run the quality gate:
 
 ```bash
 npm run quality
 git diff --check
 ```
 
-`npm run quality` validates plugin manifests, required skill materials, and
-example loop contracts.
+What it checks:
 
-## Repository Shape
+- marketplace and plugin manifests parse
+- all 11 skills exist
+- every skill has the required sections
+- required references/templates/scripts are present
+- example Loop Contracts contain the required headings
+- the stuck-loop debug fixture has enough trace data to diagnose
 
-Loopify ships as a marketplace entry plus one plugin:
+Project shape:
 
 ```text
-.claude-plugin/marketplace.json
-plugins/loopify-agent-skills/.claude-plugin/plugin.json
-plugins/loopify-agent-skills/skills/
-docs/concepts/
-docs/examples/
-scripts/
+loopify/
+├── .claude-plugin/marketplace.json
+├── docs/
+│   ├── assets/
+│   ├── concepts/
+│   ├── examples/
+│   └── goals/
+├── plugins/
+│   └── loopify-agent-skills/
+│       ├── .claude-plugin/plugin.json
+│       ├── README.md
+│       └── skills/
+└── scripts/
 ```
 
-The repository is intentionally documentation-and-template heavy. The skills are
-the product; scripts are only there to make missing pieces obvious.
+---
+
+## 🤔 FAQ
+
+**Q: Is Loopify anti-prompt?**
+A: Nope. Prompts are ingredients. Loops are the kitchen, timer, taste test, and
+cleanup checklist.
+
+**Q: Is a Loop Contract just a spec?**
+A: No. A spec says what should be true. A Loop Contract says how reality is
+allowed to prove it became true.
+
+**Q: Can this run unattended?**
+A: Sometimes. The safer answer is: it can run until its authority, budget, or
+stop rules say otherwise.
+
+**Q: Why all the trace fuss?**
+A: Because "the model said it is done" is not evidence. A trace lets a human see
+what happened, what failed, what changed, and what remains unproven.
+
+**Q: Is this production-ready?**
+A: It's a first release of a skill bundle, not a magic compliance appliance. Use
+`loopify-governance` when loops touch production, money, data, dependencies, or
+public content.
+
+---
+
+## 📜 License
+
+MIT.
+
+**Go forth and loop responsibly.** 🔁
+
+Your prompts will never be the same.

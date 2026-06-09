@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+  <title id="title">Loop Contract anatomy</title>
+  <desc id="desc">A diagram showing a Loop Contract in the center, surrounded by evidence, checks, authority, budget, trace, stop rules, and retro.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#071015"/>
+      <stop offset="65%" stop-color="#0d1c25"/>
+      <stop offset="100%" stop-color="#151018"/>
+    </linearGradient>
+    <linearGradient id="core" x1="0" x2="1">
+      <stop offset="0%" stop-color="#24e2ff"/>
+      <stop offset="50%" stop-color="#56ffd0"/>
+      <stop offset="100%" stop-color="#ffd166"/>
+    </linearGradient>
+    <style>
+      .text { font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #f0fbff; }
+      .muted { fill: #9fb6c1; }
+      .title { font-size: 42px; font-weight: 850; letter-spacing: 0; }
+      .card-title { font-size: 27px; font-weight: 800; }
+      .small { font-size: 19px; font-weight: 600; }
+      .core-title { font-size: 38px; font-weight: 850; }
+      .node { fill: rgba(10, 24, 32, .9); stroke: rgba(86, 232, 255, .34); stroke-width: 2; }
+      .link { stroke: rgba(86, 232, 255, .55); stroke-width: 3; fill: none; stroke-linecap: round; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="620" fill="url(#bg)"/>
+  <text x="64" y="70" class="text title">A Loop Contract is the deal reality can check.</text>
+  <text x="64" y="108" class="text muted small">It turns a desired end state into evidence, authority, retries, and a stop reason.</text>
+
+  <g transform="translate(430 238)">
+    <rect x="0" y="0" width="340" height="210" rx="28" fill="rgba(8, 18, 25, .95)" stroke="url(#core)" stroke-width="4"/>
+    <text x="170" y="78" text-anchor="middle" class="text core-title">Loop Contract</text>
+    <text x="170" y="122" text-anchor="middle" class="text small muted">goal -> checks -> attempts</text>
+    <text x="170" y="154" text-anchor="middle" class="text small muted">trace -> stop reason</text>
+    <rect x="86" y="174" width="168" height="10" rx="5" fill="url(#core)"/>
+  </g>
+
+  <path class="link" d="M430 303 C330 252 275 222 226 194"/>
+  <path class="link" d="M430 348 C315 348 260 348 210 348"/>
+  <path class="link" d="M430 398 C330 452 275 486 226 532"/>
+  <path class="link" d="M770 303 C870 252 925 222 974 194"/>
+  <path class="link" d="M770 348 C885 348 940 348 990 348"/>
+  <path class="link" d="M770 398 C870 452 925 486 974 532"/>
+
+  <g transform="translate(64 142)">
+    <rect class="node" width="260" height="118" rx="18"/>
+    <text x="28" y="44" class="text card-title">Evidence</text>
+    <text x="28" y="78" class="text small muted">What proves progress?</text>
+  </g>
+
+  <g transform="translate(64 289)">
+    <rect class="node" width="260" height="118" rx="18"/>
+    <text x="28" y="44" class="text card-title">Checks</text>
+    <text x="28" y="78" class="text small muted">Commands, tests, review</text>
+  </g>
+
+  <g transform="translate(64 438)">
+    <rect class="node" width="260" height="118" rx="18"/>
+    <text x="28" y="44" class="text card-title">Authority</text>
+    <text x="28" y="78" class="text small muted">What may change?</text>
+  </g>
+
+  <g transform="translate(876 142)">
+    <rect class="node" width="260" height="118" rx="18"/>
+    <text x="28" y="44" class="text card-title">Budget</text>
+    <text x="28" y="78" class="text small muted">Turns, cost, retries</text>
+  </g>
+
+  <g transform="translate(876 289)">
+    <rect class="node" width="260" height="118" rx="18"/>
+    <text x="28" y="44" class="text card-title">Trace</text>
+    <text x="28" y="78" class="text small muted">Receipts, not vibes</text>
+  </g>
+
+  <g transform="translate(876 438)">
+    <rect class="node" width="260" height="118" rx="18"/>
+    <text x="28" y="44" class="text card-title">Stop Rules</text>
+    <text x="28" y="78" class="text muted" font-size="16" font-weight="700">success / blocked / escalate</text>
+  </g>
+</svg>
