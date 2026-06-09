@@ -1,6 +1,7 @@
 # Run Final Report
 
 - Stop reason:
+- Loop directory:
 - Contract:
 - Trace:
 - Loop turns:

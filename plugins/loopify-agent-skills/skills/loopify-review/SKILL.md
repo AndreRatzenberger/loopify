@@ -42,5 +42,5 @@ A review report using `templates/review-report.md`.
 ## Example
 
 ```text
-Use loopify-review on docs/loop-contract.md, runs/trace.md, and the current git diff.
+Use loopify-review on .loopify/loops/001-papertrail/loop-contract.md, .loopify/loops/001-papertrail/trace.md, and the current git diff.
 ```

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import { existsSync, readFileSync } from "node:fs";
 
-const path = process.argv[2] ?? "docs/loop-contract.md";
+const path = process.argv[2] ?? ".loopify/loops/001-example/loop-contract.md";
 const headings = [
   "# Loop Contract",
   "## Source Spec",

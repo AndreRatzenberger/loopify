@@ -22,17 +22,22 @@ Maintain loop receipts.
 
 ## Workflow
 
-1. Locate or create the trace from `templates/trace.md`.
-2. Record each turn with command, result, failure, patch, rationale, and next
+1. Locate the loop directory or named trace file.
+2. Create `trace.md` from `templates/trace.md` if missing.
+3. Record each turn with command, result, failure, patch, rationale, and next
    check.
-3. Preserve failed attempts and rejected directions.
-4. Summarize final stop reason and evidence.
-5. Use `templates/final-evidence-summary.md` for completion summaries.
-6. Run the trace checker if available.
+4. Preserve failed attempts and rejected directions.
+5. Summarize final stop reason and evidence.
+6. Use `templates/final-evidence-summary.md` for completion summaries.
+7. Update `.loopify/index.md` when the stop reason changes.
+8. Run the trace checker if available.
 
 ## Output
 
-Default output: `runs/trace.md`, plus a final evidence summary when requested.
+Default output: `.loopify/loops/NNN-slug/trace.md`, plus a final evidence
+summary when requested.
+
+Legacy `runs/trace.md` paths are supported when the user names one.
 
 ## Validation
 
@@ -43,5 +48,5 @@ Default output: `runs/trace.md`, plus a final evidence summary when requested.
 ## Example
 
 ```text
-Use loopify-trace to summarize runs/trace.md and report the stop reason plus residual risk.
+Use loopify-trace to summarize .loopify/loops/001-papertrail/trace.md and report the stop reason plus residual risk.
 ```

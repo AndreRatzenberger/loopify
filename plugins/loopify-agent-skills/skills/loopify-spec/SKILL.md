@@ -34,10 +34,18 @@ Convert a source spec into a Loop Contract.
    requirements, and final report requirements.
 8. Write the Loop Contract using `templates/loop-contract.md`.
 9. Run the heading checker if available.
+10. If the user explicitly asked to bootstrap, make the handoff to
+    `loopify-bootstrap` with the chosen loop directory.
 
 ## Output
 
-Default output: `docs/loop-contract.md`, unless the user names another path.
+Default output in a repo: `.loopify/loops/NNN-slug/loop-contract.md`, unless
+the user names another path.
+
+`loopify-spec` should not silently mutate a repo beyond the contract. Continue
+into `loopify-bootstrap` only when the request says things like "bootstrap it",
+"make this runnable", "prepare the repo", "create the loop folder", or "spec
+and run/bootstrap this."
 
 ## Validation
 
@@ -45,9 +53,11 @@ Default output: `docs/loop-contract.md`, unless the user names another path.
 - Subjective requirements are marked visual/manual or narrowed honestly.
 - Ambiguous requirements are surfaced instead of buried.
 - Automated checks are commands the repo can plausibly run.
+- If bootstrap was requested, the target loop directory is named before the
+  handoff.
 
 ## Example
 
 ```text
-Use loopify-spec on docs/goals/prompt.md and write docs/examples/papertrail/loop-contract.md.
+Use loopify-spec on docs/goals/prompt.md and bootstrap it into .loopify/loops/001-papertrail/.
 ```

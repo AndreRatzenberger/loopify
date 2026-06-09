@@ -8,10 +8,16 @@ Files:
 - `../../goals/prompt.md`: source spec.
 - `loop-contract.md`: generated Loop Contract for PaperTrail.
 
-Suggested test:
+Suggested contract-only test:
 
 ```text
 Use loopify-spec on docs/goals/prompt.md and write docs/examples/papertrail/loop-contract.md.
+```
+
+Suggested runnable loop:
+
+```text
+Use loopify-spec on docs/goals/prompt.md and bootstrap it into .loopify/loops/001-papertrail/.
 ```
 
 What this example teaches:

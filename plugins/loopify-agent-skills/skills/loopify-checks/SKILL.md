@@ -43,5 +43,5 @@ checklist using `templates/acceptance-checklist.md`.
 ## Example
 
 ```text
-Use loopify-checks to strengthen docs/loop-contract.md for mobile layout and fallback behavior.
+Use loopify-checks to strengthen .loopify/loops/001-papertrail/loop-contract.md for mobile layout and fallback behavior.
 ```

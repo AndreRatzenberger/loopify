@@ -6,6 +6,10 @@ The shared Loopify shape is:
 state -> check -> action -> observation -> trace -> stop or repeat
 ```
 
+In repo work, each loop keeps that state in its own numbered folder under
+`.loopify/loops/`. New features get new folders instead of overwriting an
+older contract or trace.
+
 The pattern changes based on the feedback source.
 
 ## Test / Repair Loop

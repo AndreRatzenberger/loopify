@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import { existsSync, readFileSync } from "node:fs";
 
-const path = process.argv[2] ?? "runs/trace.md";
+const path = process.argv[2] ?? ".loopify/loops/001-example/trace.md";
 if (!existsSync(path)) {
   throw new Error(`Missing trace: ${path}`);
 }

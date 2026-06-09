@@ -23,22 +23,40 @@ Seed a repository with the files needed to run a goal loop.
 
 1. Read the Loop Contract or source spec.
 2. Inspect the repo stack using `references/repo-stack-detection.md`.
-3. Create or update a repo-relative goal prompt.
-4. Create or copy the Loop Contract into the repo.
-5. Add a quality gate from `templates/quality-gate.sh`.
-6. Add a trace template from `templates/trace.md`.
-7. Add an acceptance checklist or test skeletons when useful.
-8. Make shell scripts executable.
-9. Run the lightest validation that should pass before implementation.
+3. Pick the next loop directory: `.loopify/loops/NNN-slug/`.
+4. Create or update `.loopify/index.md` with the new loop entry.
+5. Copy the source spec to `source.md` when available.
+6. Create or copy the Loop Contract to `loop-contract.md`.
+7. Add `quality-gate.sh`, `trace.md`, `acceptance-checklist.md`,
+   `final-report.md`, `retro.md`, and `artifacts/`.
+8. Add a repo-relative goal prompt when the target agent needs one.
+9. Make shell scripts executable.
+10. Run the lightest validation that should pass before implementation.
 
 ## Output
 
-Typical outputs: `docs/goals/goal.md`, `docs/loop-contract.md`,
-`scripts/quality-gate.sh`, `runs/trace.md`, and an acceptance checklist.
+Default outputs:
+
+- `.loopify/index.md`
+- `.loopify/loops/NNN-slug/source.md`
+- `.loopify/loops/NNN-slug/loop-contract.md`
+- `.loopify/loops/NNN-slug/quality-gate.sh`
+- `.loopify/loops/NNN-slug/acceptance-checklist.md`
+- `.loopify/loops/NNN-slug/trace.md`
+- `.loopify/loops/NNN-slug/final-report.md`
+- `.loopify/loops/NNN-slug/retro.md`
+- `.loopify/loops/NNN-slug/artifacts/`
+
+Legacy flat paths such as `docs/loop-contract.md`, `scripts/quality-gate.sh`,
+and `runs/trace.md` are supported when the user names them, but new loops
+should use loop directories.
 
 ## Validation
 
 - Repo-relative paths work from the project root.
+- The loop directory is self-contained enough for `loopify-run`.
+- `.loopify/index.md` lists the loop number, slug, source, status, and stop
+  reason when known.
 - Existing checks are preserved.
 - If implementation has not happened, the first failing check is intentional
   and documented.
@@ -46,5 +64,5 @@ Typical outputs: `docs/goals/goal.md`, `docs/loop-contract.md`,
 ## Example
 
 ```text
-Use loopify-bootstrap with docs/loop-contract.md and create scripts/quality-gate.sh plus runs/trace.md.
+Use loopify-bootstrap with .loopify/loops/001-papertrail/loop-contract.md.
 ```

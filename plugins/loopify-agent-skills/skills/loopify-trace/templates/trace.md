@@ -1,5 +1,8 @@
 # Loop Trace
 
+- Loop directory:
+- Contract:
+
 ## Turn 1
 
 - Command:

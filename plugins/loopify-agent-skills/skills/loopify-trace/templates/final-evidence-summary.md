@@ -1,6 +1,7 @@
 # Final Evidence Summary
 
 - Stop reason:
+- Loop directory:
 - Contract path:
 - Trace path:
 - Passing commands:

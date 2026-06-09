@@ -35,22 +35,19 @@ its work.
 /plugin install loopify-agent-skills@loopify
 ```
 
-**2. Turn a spec into a contract**
+**2. Turn a spec into a loop folder**
 
 ```text
-Use loopify-spec on docs/goals/goal.md and write docs/loop-contract.md.
+Use loopify-spec on docs/goals/goal.md and bootstrap it into .loopify/loops/001-first-loop/.
 ```
 
-**3. Bootstrap the repo**
+For a read-only compile, omit `and bootstrap it`; `loopify-spec` will only
+write the contract. Add the bootstrap phrase when you want repo files.
+
+**3. Run until the loop earns a stop reason**
 
 ```text
-Use loopify-bootstrap with docs/loop-contract.md.
-```
-
-**4. Run until the loop earns a stop reason**
-
-```text
-Use loopify-run on docs/loop-contract.md. Stop only with success, blocked, escalated, or budget-exhausted.
+Use loopify-run on .loopify/loops/001-first-loop/. Stop only with success, blocked, escalated, or budget-exhausted.
 ```
 
 **What just happened?**
@@ -62,6 +59,37 @@ Use loopify-run on docs/loop-contract.md. Stop only with success, blocked, escal
   with receipts.
 
 It's like having an agent that can be ambitious without becoming slippery. 🧾
+
+---
+
+## 🗂️ Loop Folders: One Feature, One Folder
+
+Loopify saves runnable work as numbered folders:
+
+```text
+.loopify/
+  index.md
+  loops/
+    001-first-loop/
+      source.md
+      loop-contract.md
+      quality-gate.sh
+      acceptance-checklist.md
+      trace.md
+      final-report.md
+      retro.md
+      artifacts/
+    002-next-feature/
+      ...
+```
+
+Why folders? Because a repo rarely has one eternal goal. Each feature,
+experiment, repair, or publishing pass deserves its own contract, checks,
+trace, final report, and leftovers.
+
+`loopify-spec` can hand off to `loopify-bootstrap` when the user explicitly
+asks for it: "spec and bootstrap it", "make this runnable", or "create the loop
+folder." Without that phrase, it stays pure and writes only the Loop Contract.
 
 ---
 
@@ -110,11 +138,14 @@ Loopify ships 11 skills. The core spine is:
 loopify-spec -> loopify-bootstrap -> loopify-run -> loopify-trace
 ```
 
+The `loopify-spec -> loopify-bootstrap` edge is explicit. Say "bootstrap it" or
+"create the loop folder" when you want that mutation.
+
 | Skill | What it does |
 | --- | --- |
-| `loopify-spec` | Converts prose specs into Loop Contracts. |
-| `loopify-bootstrap` | Seeds goal prompts, quality gates, traces, and checklists. |
-| `loopify-run` | Executes a contract by checking, patching, rerunning, and tracing. |
+| `loopify-spec` | Converts prose specs into Loop Contracts, optionally handing off to bootstrap when asked. |
+| `loopify-bootstrap` | Seeds `.loopify/loops/NNN-slug/` with source, contract, quality gate, trace, checklist, and index entry. |
+| `loopify-run` | Executes a loop folder by checking, patching, rerunning, and tracing. |
 | `loopify-checks` | Turns vague requirements into honest evidence. |
 | `loopify-trace` | Keeps receipts across attempts. |
 | `loopify-review` | Audits contracts, traces, done claims, and residual risk. |
@@ -145,13 +176,13 @@ the kind of spec that should not be trusted to a one-shot prompt.
 Try:
 
 ```text
-Use loopify-spec on docs/goals/prompt.md and write docs/examples/papertrail/loop-contract.md.
+Use loopify-spec on docs/goals/prompt.md and bootstrap it into .loopify/loops/001-papertrail/.
 ```
 
 Then inspect:
 
 ```text
-docs/examples/papertrail/loop-contract.md
+.loopify/loops/001-papertrail/loop-contract.md
 ```
 
 If the contract maps requirements to evidence, names manual review, and refuses

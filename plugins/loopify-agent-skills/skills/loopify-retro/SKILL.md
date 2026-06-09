@@ -43,5 +43,5 @@ Loop retro document and optional template/process improvements.
 ## Example
 
 ```text
-Use loopify-retro on runs/trace.md and write docs/retros/2026-06-09-loop-retro.md.
+Use loopify-retro on .loopify/loops/001-papertrail/trace.md and write .loopify/loops/001-papertrail/retro.md.
 ```

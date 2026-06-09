@@ -46,5 +46,5 @@ Codex SDK actuator script/template and integration notes.
 ## Example
 
 ```text
-Use loopify-codex-sdk to scaffold a repair actuator for the failing check in docs/loop-contract.md.
+Use loopify-codex-sdk to scaffold a repair actuator for the failing check in .loopify/loops/001-papertrail/loop-contract.md.
 ```

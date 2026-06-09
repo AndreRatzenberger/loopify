@@ -46,5 +46,5 @@ Governance addendum, updated Loop Contract, or harness-change contract.
 ## Example
 
 ```text
-Use loopify-governance to add budgets, denied paths, and a harness-change contract to docs/loop-contract.md.
+Use loopify-governance to add budgets, denied paths, and a harness-change contract to .loopify/loops/001-papertrail/loop-contract.md.
 ```

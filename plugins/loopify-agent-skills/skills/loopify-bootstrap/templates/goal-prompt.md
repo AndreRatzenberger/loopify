@@ -2,5 +2,8 @@
 
 Work from the repository root.
 
-Read the Loop Contract and execute the loop until success, blocked, escalated,
-or budget-exhausted. Do not claim done without evidence.
+Read `.loopify/index.md`, open the target loop directory, and execute
+`loop-contract.md` until success, blocked, escalated, or budget-exhausted.
+
+Run the loop directory quality gate, update `trace.md` after each attempt, write
+`final-report.md` at the end, and do not claim done without evidence.

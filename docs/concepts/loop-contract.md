@@ -2,6 +2,10 @@
 
 A Loop Contract turns a spec into an executable feedback loop.
 
+In a runnable repo, the preferred path is
+`.loopify/loops/NNN-slug/loop-contract.md`. Standalone contracts can still live
+elsewhere when the user only wants a spec compiled.
+
 The contract answers seven questions:
 
 - Goal: what output or state counts?

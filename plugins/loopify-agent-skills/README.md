@@ -9,6 +9,10 @@ The plugin is organized around one spine:
 loopify-spec -> loopify-bootstrap -> loopify-run -> loopify-trace
 ```
 
+`loopify-spec` writes a contract by default. When the user asks to "bootstrap
+it" or "create the loop folder", it hands off to `loopify-bootstrap`, which
+seeds `.loopify/loops/NNN-slug/`.
+
 The remaining skills strengthen checks, review, debugging, demos, Codex SDK
 actuators, retros, and governance.
 
@@ -17,8 +21,8 @@ actuators, retros, and governance.
 | Skill | Use it when |
 | --- | --- |
 | `loopify-spec` | A prose spec needs a Loop Contract. |
-| `loopify-bootstrap` | A repo needs goal prompt, quality gate, trace, and checklist. |
-| `loopify-run` | A contract should be executed by evidence. |
+| `loopify-bootstrap` | A repo needs a numbered loop folder with source, contract, checks, trace, and reports. |
+| `loopify-run` | A loop folder should be executed by evidence. |
 | `loopify-checks` | Requirements need better automated, visual, or manual proof. |
 | `loopify-trace` | A loop needs receipts or final evidence summary. |
 | `loopify-review` | A done claim or contract needs audit. |
