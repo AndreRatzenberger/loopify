@@ -17,13 +17,15 @@ One loop should fit in one folder:
       artifacts/
 ```
 
-This is the default shape for runnable Loopify work.
+Loopify uses this shape for runnable work. One loop, one little box of
+evidence.
 
 ## Why Not One Global Contract?
 
 A repo accumulates loops: first feature, next feature, repair pass, polish pass,
 release pass, migration, demo, retrospective. If all of those write
-`docs/loop-contract.md` and `runs/trace.md`, the state becomes ambiguous.
+`docs/loop-contract.md` and `runs/trace.md`, the repo gets a junk drawer with a
+Markdown extension.
 
 Numbered loop folders make history reviewable:
 
@@ -32,7 +34,7 @@ Numbered loop folders make history reviewable:
 - `003-release-readiness` can focus on packaging, docs, and publish checks.
 
 Each loop can inherit lessons from the previous one without pretending it is the
-same unit of work.
+same job.
 
 ## Naming
 
@@ -49,7 +51,7 @@ lowercase, and stable.
 
 ## The Index
 
-`.loopify/index.md` is a small ledger, not a database. It should answer:
+`.loopify/index.md` is a ledger, not a database. It should answer:
 
 - Which loops exist?
 - What source started each loop?
@@ -65,6 +67,6 @@ Details stay inside the loop folder.
 Contract. It should not silently create repo state.
 
 When the user asks to "bootstrap it", "make this runnable", "prepare the repo",
-or "create the loop folder", `loopify-spec` should immediately hand off to
-`loopify-bootstrap` with the chosen loop directory. That gives a smooth workflow
-without hidden mutation.
+or "create the loop folder", `loopify-spec` should hand off to
+`loopify-bootstrap` with the chosen loop directory. Smooth workflow, no surprise
+mutation.

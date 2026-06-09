@@ -1,6 +1,7 @@
 # Loop Directory Example
 
-This fixture shows the default runnable Loopify layout:
+The default runnable layout gives one loop a drawer for its keys, receipts, and
+weird little artifacts:
 
 ```text
 .loopify/
@@ -21,4 +22,4 @@ What this example teaches:
 
 - One feature gets one numbered loop folder.
 - The contract, checks, trace, reports, and evidence stay together.
-- Future features can create `002-*` without overwriting `001-*`.
+- Future features can create `002-*` without rummaging through `001-*`.

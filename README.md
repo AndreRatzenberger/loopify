@@ -17,12 +17,12 @@
 Stop writing heroic prompts. Start writing contracts reality can check.
 
 **Loopify** is a Claude plugin-format skill bundle for turning specs into
-executable feedback loops. A prompt asks for an answer. A loop defines how the
-system keeps checking, repairing, and stopping until reality matches the
-contract.
+executable feedback loops. A prompt asks for an answer. A loop gives the agent
+a workbench: check reality, patch the thing, write down what happened, stop for
+a reason.
 
-Think of it as **promptcraft with receipts**. The kind where "done" has to show
-its work.
+Think of it as **promptcraft with receipts**. Tiny bureaucracy for ambitious
+agents. The kind where "done" has to show its work.
 
 ---
 
@@ -58,7 +58,7 @@ Use loopify-run on .loopify/loops/001-first-loop/. Stop only with success, block
 - **The run** checked reality, patched from feedback, wrote a trace, and stopped
   with receipts.
 
-It's like having an agent that can be ambitious without becoming slippery. 🧾
+You got a paper trail instead of a victory monologue. 🧾
 
 ---
 
@@ -83,9 +83,9 @@ Loopify saves runnable work as numbered folders:
       ...
 ```
 
-Why folders? Because a repo rarely has one eternal goal. Each feature,
-experiment, repair, or publishing pass deserves its own contract, checks,
-trace, final report, and leftovers.
+Why folders? Because repos collect quests. First feature, weird bug, polish
+pass, release pass. One global contract turns into a junk drawer. Numbered loop
+folders keep each little adventure inspectable.
 
 `loopify-spec` can hand off to `loopify-bootstrap` when the user explicitly
 asks for it: "spec and bootstrap it", "make this runnable", or "create the loop
@@ -101,11 +101,10 @@ folder." Without that phrase, it stays pure and writes only the Loop Contract.
 
 **Prompt**: ask once and hope.
 **Spec**: describe the desired end state.
-**Loop**: keep checking reality against the contract until the work earns a
-stop reason.
+**Loop**: check reality against the contract until the work earns a stop
+reason.
 
-The important move is not "prompts are dead." Prompts still live inside the
-system. The unit of work moves from the prompt to the loop.
+Prompts still matter. They are no longer the unit of done.
 
 ---
 
@@ -125,14 +124,17 @@ A Loop Contract answers the questions a one-shot prompt usually hand-waves:
 - **Stop**: what ends in success, blocked, escalated, or budget-exhausted?
 - **Trace**: what receipt does the loop leave behind?
 
-Without those, "looping" is just burning tokens while the model chases its own
-reflection. Very cyberpunk. Not very useful.
+Without those, "looping" burns tokens while the model chases its own
+reflection. Cyberpunk, sure. Useful, no.
+
+The contract is boring on purpose. Boring is how the agent remembers where the
+sharp objects are.
 
 ---
 
 ## 🧰 The Skill Chest
 
-Loopify ships 11 skills. The core spine is:
+Loopify ships 11 skills. The spine is small:
 
 ```text
 loopify-spec -> loopify-bootstrap -> loopify-run -> loopify-trace
@@ -157,7 +159,8 @@ The `loopify-spec -> loopify-bootstrap` edge is explicit. Say "bootstrap it" or
 
 Each skill keeps its `SKILL.md` lean. Deeper guidance lives in `references/`;
 copyable output shapes live in `templates/`; deterministic helpers live in
-`scripts/`.
+`scripts/`. The agent sees the short path first and can reach for the heavy
+tools when the loop bites back.
 
 ---
 
@@ -170,8 +173,9 @@ docs/goals/prompt.md
 ```
 
 It asks for a research-paper catalog with arXiv ingestion, GraphRAG, fallbacks,
-logging, four views, and mandatory Playwright testing. In other words: exactly
-the kind of spec that should not be trusted to a one-shot prompt.
+logging, four views, and mandatory Playwright testing. It is lumpy in all the
+right ways. A one-shot prompt would smile, nod, and quietly lose half the
+requirements.
 
 Try:
 
@@ -199,8 +203,8 @@ Every loop stops with one of four reasons:
 - `escalated`: a human decision is required.
 - `budget-exhausted`: the contract's turn, time, retry, or cost budget is done.
 
-This matters. A loop without stop rules is not autonomy. It's a very expensive
-while-loop with vibes.
+A loop without stop rules is not autonomy. It is an expensive `while true`
+wearing a cape.
 
 ---
 
@@ -265,8 +269,8 @@ loopify/
 ## 🤔 FAQ
 
 **Q: Is Loopify anti-prompt?**
-A: Nope. Prompts are ingredients. Loops are the kitchen, timer, taste test, and
-cleanup checklist.
+A: Nope. Prompts are ingredients. Loops are the recipe notes, oven timer, smoke
+alarm, taste test, and cleanup checklist.
 
 **Q: Is a Loop Contract just a spec?**
 A: No. A spec says what should be true. A Loop Contract says how reality is
@@ -281,9 +285,9 @@ A: Because "the model said it is done" is not evidence. A trace lets a human see
 what happened, what failed, what changed, and what remains unproven.
 
 **Q: Is this production-ready?**
-A: It's a first release of a skill bundle, not a magic compliance appliance. Use
-`loopify-governance` when loops touch production, money, data, dependencies, or
-public content.
+A: It's a first release of a skill bundle, not a compliance vending machine.
+Use `loopify-governance` when loops touch production, money, data,
+dependencies, or public content.
 
 ---
 
@@ -291,6 +295,6 @@ public content.
 
 MIT.
 
-**Go forth and loop responsibly.** 🔁
+**Go forth and stop for boring, well-documented reasons.** 🔁
 
 Your prompts will never be the same.

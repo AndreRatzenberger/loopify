@@ -12,4 +12,5 @@ What this example teaches:
 - Repeated failures are data.
 - The recovery should change the diagnostic, not keep applying smaller visual
   patches.
-- A good debug report names when to escalate.
+- A good debug report names when to escalate instead of pretending one more
+  tiny patch will summon the answer.

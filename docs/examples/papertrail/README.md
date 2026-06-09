@@ -1,7 +1,8 @@
 # PaperTrail Stress Fixture
 
 `docs/goals/prompt.md` is the source spec for this example. It is intentionally
-large and demanding so `loopify-spec` can be tested on a realistic app request.
+large and demanding: ingestion, GraphRAG, fallbacks, logs, browser checks, the
+whole tiny weather system. Perfect loop bait.
 
 Files:
 
@@ -25,4 +26,5 @@ What this example teaches:
 - Large specs need requirement/evidence mapping before implementation.
 - Mandatory Playwright testing belongs in the contract as a manual/visual gate
   plus automated browser checks.
-- Fallback behavior needs explicit tests, not just prose.
+- Fallback behavior needs explicit tests. Prose cannot catch a broken fallback
+  at 1 a.m.

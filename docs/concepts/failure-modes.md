@@ -1,6 +1,7 @@
 # Failure Modes
 
-Loopify should help agents name loop failures explicitly.
+Loopify should help agents name failures while the failures are still useful.
+The trace is not a confession booth. It is a diagnostic tool.
 
 ## Token Fire
 
@@ -11,7 +12,8 @@ prefer event triggers over polling, and stop when nothing changed.
 
 ## Doom Loop
 
-The loop repeats the same repair against the same failure.
+The loop repeats the same repair against the same failure. It sands the same
+corner forever and calls the dust progress.
 
 Mitigations: track failure signatures, force a new hypothesis after N attempts,
 change the diagnostic, or escalate.
@@ -28,8 +30,8 @@ and record residual risk.
 
 A command passes but does not cover the requirement being claimed.
 
-Mitigations: map each requirement to evidence and state exactly what each check
-does not prove.
+Mitigations: map each requirement to evidence. Say what each check proves and
+what it leaves untouched.
 
 ## Benchmark Overfit
 

@@ -10,7 +10,7 @@ In repo work, each loop keeps that state in its own numbered folder under
 `.loopify/loops/`. New features get new folders instead of overwriting an
 older contract or trace.
 
-The pattern changes based on the feedback source.
+The shape stays small. The feedback source changes.
 
 ## Test / Repair Loop
 
@@ -31,8 +31,8 @@ Use when a reviewer or evaluator can score quality and provide useful feedback.
 draft -> evaluate coverage/quality -> revise -> evaluate again
 ```
 
-This is useful for docs, prompts, specs, and examples. The evaluator must be
-stronger than "the same model likes its own answer."
+Useful for docs, prompts, specs, and examples. The evaluator must be stronger
+than "the same model likes its own answer."
 
 ## Research / Source Loop
 
@@ -72,7 +72,7 @@ Use when recurrence is the point: polling CI, checking a deploy, refreshing a
 report, or watching a queue.
 
 Scheduled loops need strict budgets and event triggers where possible. Polling
-without state-change checks causes token fire.
+without state-change checks is token fire with a calendar invite.
 
 ## Human-In-The-Loop Review
 

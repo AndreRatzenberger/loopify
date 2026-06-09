@@ -1,6 +1,8 @@
 # Markdown Research Note Example
 
-Use this fixture to test `loopify-spec` on a non-code writing/research spec.
+Use this fixture to test `loopify-spec` on a writing/research spec. The target
+is not "make the prose nicer." The target is "make the claims survive contact
+with sources."
 
 Files:
 

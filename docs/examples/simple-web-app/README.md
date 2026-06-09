@@ -1,6 +1,7 @@
 # Simple Web App Example
 
-Use this fixture to test `loopify-spec` on a small UI app spec.
+Use this fixture to test `loopify-spec` on a small UI app spec. Small is good:
+the failures have nowhere to hide.
 
 Files:
 

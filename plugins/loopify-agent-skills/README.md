@@ -1,7 +1,9 @@
 # loopify-agent-skills
 
-Loopify agent skills convert specs into executable feedback loops with evidence,
-traces, stop rules, and governance.
+Loopify agent skills convert specs into feedback loops with evidence, traces,
+stop rules, and governance.
+
+A good loop gives the agent a job, a meter, a leash, and a receipt.
 
 The plugin is organized around one spine:
 
@@ -13,8 +15,8 @@ loopify-spec -> loopify-bootstrap -> loopify-run -> loopify-trace
 it" or "create the loop folder", it hands off to `loopify-bootstrap`, which
 seeds `.loopify/loops/NNN-slug/`.
 
-The remaining skills strengthen checks, review, debugging, demos, Codex SDK
-actuators, retros, and governance.
+The remaining skills tighten checks, review done claims, debug stuck runs, build
+demos, wire Codex SDK actuators, write retros, and add governance.
 
 ## Skills
 
@@ -42,3 +44,6 @@ Run validation from the repository root:
 ```bash
 npm run quality
 ```
+
+If a skill change cannot explain what evidence proves it worked, the skill is
+still mush. Keep shaping it.

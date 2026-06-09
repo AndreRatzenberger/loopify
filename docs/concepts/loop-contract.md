@@ -1,12 +1,12 @@
 # Loop Contract
 
-A Loop Contract turns a spec into an executable feedback loop.
+A Loop Contract turns a spec into a feedback loop reality can grade.
 
 In a runnable repo, the preferred path is
 `.loopify/loops/NNN-slug/loop-contract.md`. Standalone contracts can still live
 elsewhere when the user only wants a spec compiled.
 
-The contract answers seven questions:
+The contract answers seven questions the prompt usually dodges:
 
 - Goal: what output or state counts?
 - Evidence: how will the loop know the work improved?
@@ -46,9 +46,9 @@ The contract answers seven questions:
 - `ambiguous`: needs clarification or narrowing before honest checking.
 - `out-of-scope`: explicitly not pursued by this loop.
 
-Do not convert taste words into fake automation. If "polished" matters, encode
-the concrete checks that can be automated and leave the remaining judgment as a
-manual or visual review item.
+Do not convert taste words into fake automation. If "polished" matters, write
+the checks a machine can run and leave taste where it belongs: visual or manual
+review.
 
 ## Stop Rules
 
@@ -64,7 +64,8 @@ Every loop should stop with exactly one stop reason:
 
 ## Blocked Rules
 
-Blocked rules should be concrete enough to prevent endless patching:
+Blocked rules should be concrete enough to stop the agent from chewing the same
+wire forever:
 
 - same failure signature repeats after N distinct hypotheses
 - required credentials or external services are unavailable
