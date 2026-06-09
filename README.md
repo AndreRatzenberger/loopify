@@ -58,12 +58,17 @@ the marketplace from the CLI command above, restart or refresh Codex, and check
 the marketplace list again. Shared workspace installs can also appear under
 **Shared with you**.
 
-Older slash-command plugin surfaces may use:
+Claude Code/Github Copilot:
 
 ```text
 /plugin marketplace add AndreRatzenberger/loopify
 /plugin install loopify-agent-skills@loopify
 ```
+
+Other agent harnesses: Ask your bot.
+
+Give it https://github.com/AndreRatzenberger/loopify and ask it to install or
+load the `loopify-agent-skills` bundle.
 
 **2. Turn a spec into a loop folder**
 
