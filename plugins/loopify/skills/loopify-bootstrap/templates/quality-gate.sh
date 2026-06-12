@@ -21,7 +21,7 @@ if [ -f pyproject.toml ]; then
 fi
 
 contract="${LOOPIFY_CONTRACT:-$loop_dir/loop-contract.md}"
-checker="plugins/loopify-agent-skills/skills/loopify-spec/scripts/check-loop-contract.mjs"
+checker="plugins/loopify/skills/loopify-spec/scripts/check-loop-contract.mjs"
 
 if [ -f "$contract" ] && [ -f "$checker" ]; then
   node "$checker" "$contract"

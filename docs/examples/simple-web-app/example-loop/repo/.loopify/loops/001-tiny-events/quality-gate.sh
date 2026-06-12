@@ -8,4 +8,4 @@ cd "$repo_root"
 
 npm run build
 npx playwright test
-node ../../../../../plugins/loopify-agent-skills/skills/loopify-spec/scripts/check-loop-contract.mjs "$loop_dir/loop-contract.md"
+node ../../../../../plugins/loopify/skills/loopify-spec/scripts/check-loop-contract.mjs "$loop_dir/loop-contract.md"
