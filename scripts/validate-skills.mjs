@@ -1,7 +1,7 @@
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 
-const skillsRoot = "plugins/loopify-agent-skills/skills";
+const skillsRoot = "plugins/loopify/skills";
 const requiredSkills = [
   "loopify-spec",
   "loopify-bootstrap",

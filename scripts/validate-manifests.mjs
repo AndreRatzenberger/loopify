@@ -8,7 +8,7 @@ function readJson(path) {
 }
 
 const marketplace = readJson(".claude-plugin/marketplace.json");
-const plugin = readJson("plugins/loopify-agent-skills/.claude-plugin/plugin.json");
+const plugin = readJson("plugins/loopify/.claude-plugin/plugin.json");
 
 const requiredMarketplace = [
   ["name", marketplace.name],
@@ -35,13 +35,13 @@ for (const [field, value] of [...requiredMarketplace, ...requiredPlugin]) {
   }
 }
 
-const entry = marketplace.plugins.find((candidate) => candidate.name === "loopify-agent-skills");
-if (!entry || entry.source !== "./plugins/loopify-agent-skills") {
-  throw new Error("Marketplace must point to ./plugins/loopify-agent-skills");
+const entry = marketplace.plugins.find((candidate) => candidate.name === "loopify");
+if (!entry || entry.source !== "./plugins/loopify") {
+  throw new Error("Marketplace must point to ./plugins/loopify");
 }
 
-if (plugin.name !== "loopify-agent-skills") {
-  throw new Error("Plugin manifest name must be loopify-agent-skills");
+if (plugin.name !== "loopify") {
+  throw new Error("Plugin manifest name must be loopify");
 }
 
 console.log("Manifest validation passed.");

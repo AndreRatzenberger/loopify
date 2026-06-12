@@ -1,4 +1,4 @@
-# loopify-agent-skills
+# loopify
 
 Loopify agent skills convert specs into feedback loops with evidence, traces,
 stop rules, and governance.

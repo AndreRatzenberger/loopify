@@ -42,7 +42,7 @@ Codex CLI:
 
 ```bash
 codex plugin marketplace add AndreRatzenberger/loopify
-codex plugin add loopify-agent-skills@loopify
+codex plugin add loopify@loopify
 ```
 
 Or browse it interactively:
@@ -62,13 +62,18 @@ Claude Code/Github Copilot:
 
 ```text
 /plugin marketplace add AndreRatzenberger/loopify
-/plugin install loopify-agent-skills@loopify
+/plugin install loopify@loopify
 ```
+
+> Upgrading from 0.1.x? The plugin was renamed: uninstall
+> `loopify-agent-skills@loopify`, then install `loopify@loopify`. Your
+> `.loopify/` folders are unaffected — the plugin name is not part of any
+> loop artifact.
 
 Other agent harnesses: Ask your bot.
 
 Give it https://github.com/AndreRatzenberger/loopify and ask it to install or
-load the `loopify-agent-skills` bundle.
+load the `loopify` bundle.
 
 **2. Turn a spec into a loop folder**
 
@@ -300,7 +305,7 @@ loopify/
 │   ├── examples/
 │   └── goals/
 ├── plugins/
-│   └── loopify-agent-skills/
+│   └── loopify/
 │       ├── .claude-plugin/plugin.json
 │       ├── README.md
 │       └── skills/
