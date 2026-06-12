@@ -1,5 +1,6 @@
 import { existsSync, readFileSync } from "node:fs";
-import { REQUIRED_CONTRACT_HEADINGS } from "../plugins/loopify/skills/loopify-spec/scripts/check-loop-contract.mjs";
+import { spawnSync } from "node:child_process";
+import { checkLoopContract } from "../plugins/loopify/skills/loopify-spec/scripts/check-loop-contract.mjs";
 
 const required = [
   "docs/examples/simple-web-app/spec.md",
@@ -56,12 +57,7 @@ for (const path of [
   "docs/examples/loop-directory/.loopify/loops/001-tiny-events/loop-contract.md",
   ".loopify/loops/001-loop-directories/loop-contract.md",
 ]) {
-  const text = readFileSync(path, "utf8");
-  for (const heading of REQUIRED_CONTRACT_HEADINGS) {
-    if (!text.includes(heading)) {
-      throw new Error(`${path} missing ${heading}`);
-    }
-  }
+  checkLoopContract(path);
 }
 
 const loopIndex = readFileSync("docs/examples/loop-directory/.loopify/index.md", "utf8");
@@ -117,6 +113,26 @@ const diagnosis = readFileSync("docs/examples/stuck-loop-debug/expected-diagnosi
 for (const phrase of ["Pattern:", "Recovery:", "Escalate"]) {
   if (!diagnosis.includes(phrase)) {
     throw new Error(`stuck-loop diagnosis missing ${phrase}`);
+  }
+}
+
+// The simple-web-app snapshot ships without node_modules. As checked out,
+// its gate must fail fast with the documented prerequisite, not an opaque
+// module-resolution error. Skipped when deps happen to be installed locally.
+const exampleRepo = "docs/examples/simple-web-app/example-loop/repo";
+if (existsSync(`${exampleRepo}/node_modules`)) {
+  console.log("skip: example gate prerequisite check (node_modules present)");
+} else {
+  const gate = spawnSync(
+    "bash",
+    [`${exampleRepo}/.loopify/loops/001-tiny-events/quality-gate.sh`],
+    { encoding: "utf8" },
+  );
+  if (gate.status === 0) {
+    throw new Error("example gate passed without installed dependencies — prerequisite check is gone");
+  }
+  if (!gate.stderr.includes("missing dependencies")) {
+    throw new Error(`example gate failed without the documented prerequisite message:\n${gate.stdout}${gate.stderr}`);
   }
 }
 

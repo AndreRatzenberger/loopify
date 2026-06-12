@@ -4,3 +4,8 @@ node_modules/
 dist/
 coverage/
 .cache/
+
+# agent-local state (not part of the published plugin)
+.claude/
+.codex/
+.*-memory

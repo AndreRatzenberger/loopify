@@ -20,3 +20,18 @@ The trace is not a polished success story. Good. It keeps the useful failures:
 
 Loops are not wish spells. They let reality talk back until the work earns its
 stop reason.
+
+## Re-running the gate
+
+The snapshot ships without dependencies installed. To re-run the quality gate
+yourself:
+
+```bash
+cd docs/examples/simple-web-app/example-loop/repo
+npm install
+npx playwright install chromium
+bash .loopify/loops/001-tiny-events/quality-gate.sh
+```
+
+Without the install steps the gate fails fast with the prerequisite message
+instead of running.

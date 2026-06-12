@@ -7,7 +7,7 @@ import { join, resolve } from "node:path";
 const root = resolve(process.argv[2] ?? ".");
 
 const codexAgent = `name = "loop_verifier"
-description = "Read-only Loopify verifier. Grades a loop folder's success claim against its Loop Contract; writes only verdict.md."
+description = "Read-only Loopify verifier. Grades a loop folder's success claim against its Loop Contract; returns the verdict.md body for the caller to transcribe."
 sandbox_mode = "read-only"
 developer_instructions = """
 You are the checker, not the maker. Read the loop folder's loop-contract.md,
@@ -15,7 +15,9 @@ trace.md, the diff, and the quality gate output. Re-run the contract's checks
 yourself; exit codes are evidence, the maker's claims are not. Grade every
 Requirement Evidence Map row pass/fail/cannot-verify. Review the contract
 itself: if the evidence map no longer measures the objective, that is a
-finding even when every check is green. Your only write is verdict.md.
+finding even when every check is green. Your sandbox is read-only: you cannot
+write files. Return the complete verdict.md body as your final message; the
+caller transcribes it verbatim into the loop folder and records provenance.
 Bash-equivalent command execution is available to re-run checks; sandbox_mode enforces read-only at the filesystem level.
 """
 `;

@@ -23,9 +23,10 @@ loopify.
   smoke:examples).
 - emit-verifier-agent.mjs host adapter implemented (automated, smoke:verification).
 - check-stop-reason.mjs enforces success/blocked/escalated stop reasons
-  (automated, smoke:verification — 16 fixtures including forged verdict, empty
-  Maker, duplicate/inline-decoy Overall, placeholder and invisible-char
-  identities, gate deception, CRLF).
+  (automated, smoke:verification — adversarial fixture suite including forged
+  verdict, empty Maker, duplicate/inline-decoy Overall, placeholder and
+  invisible-char identities, gate deception, CRLF; 16 fixtures at loop time,
+  the suite grows).
 - loopify-run and loopify-review skill docs updated to include verification steps
   (manual).
 - concepts, README, and failure-modes docs updated to reflect mandatory
@@ -47,7 +48,7 @@ loopify.
 | Example contracts carry `## Verification` | automated | `smoke:examples` checks heading-checked file list |
 | verdict.md template + example | automated | `validate-skills` requires verdict template; `smoke:examples` checks example verdict fields |
 | emit-verifier-agent.mjs host adapter | automated | `smoke:verification` exercises the adapter |
-| check-stop-reason.mjs — 16 fixtures | automated | `smoke:verification` runs 16 adversarial fixtures incl. forged verdict, empty Maker, duplicate Overall, placeholder identities, invisible chars, gate deception, CRLF |
+| check-stop-reason.mjs — adversarial fixtures | automated | `smoke:verification` runs the adversarial fixture suite (16 at loop time, grown since) incl. forged verdict, empty Maker, duplicate Overall, placeholder identities, invisible chars, gate deception, CRLF |
 | loopify-run + loopify-review docs updated | manual | Skill docs reviewed for verification-step wording |
 | concepts/README/failure-modes updated | manual | Concept doc, README, and failure-modes reviewed for mandatory-verification mentions |
 | Verification framing is honest (tripwire, not authorship proof) | manual | docs state check-stop-reason is a tripwire; independence = reproducible automated evidence + a named independent judge + a self-declared provenance line (loop-contract.md Verification Section, independent-verification.md, failure-modes.md) |

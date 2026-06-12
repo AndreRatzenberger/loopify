@@ -30,14 +30,18 @@ No rung available → the loop cannot reach `success`; stop `escalated`
 - If the full gate is too expensive to re-run, the contract's Verification
   section may name a cheaper command subset — but it must be a command list,
   never "trust the trace".
-- Your only write is `verdict.md` (template: `templates/verdict.md`).
+- Your only output artifact is `verdict.md` (template: `templates/verdict.md`).
+  In a writable context it is your only write; in a read-only sandbox (the
+  emitted Codex verifier) return the verdict body and the caller transcribes
+  it verbatim.
 
 ## Wiring recipes
 
 - **Claude Code maker → Codex verifier:** run the emitted
   `.codex/agents/loop-verifier.toml` in a Codex session pointed at the repo;
   prompt: "Verify .loopify/loops/NNN-slug/ against its loop-contract.md and
-  write verdict.md."
+  return the verdict.md body." The sandbox is read-only, so the caller
+  transcribes the returned body verbatim as `verdict.md`.
 - **Codex maker → Claude Code verifier:** use the emitted
   `.claude/agents/loopify-verifier.md` sub-agent with the same prompt.
 - **Fallback (no host dirs):** spawn a fresh sub-agent with read+run-checks

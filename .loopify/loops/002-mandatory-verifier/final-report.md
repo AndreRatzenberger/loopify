@@ -9,7 +9,7 @@
 - Loop turns: 13
 - Commands run: npm run quality; git diff --check
 - Passing command: npm run quality
-- Evidence: validators + 16 verification smoke fixtures green
+- Evidence: validators + the full verification smoke suite green (18 fixtures at the flip; the suite keeps growing, see scripts/smoke-test-verification.mjs)
 - Manual / visual review: required — see the contract's Manual / Visual Review Items; reviewed by the independent verifier (verdict.md)
 - Remaining caveats: success rests on an independent cross-model verdict
   (Codie/GPT-5.4, verdict.md @ 87456a5), not the maker's say-so; round 1 was

@@ -40,7 +40,10 @@ When invoked as the independent verifier (never the maker's session):
 2. Re-run the quality gate and the contract's cheap checks yourself.
 3. Grade every Requirement Evidence Map row pass/fail/cannot-verify.
 4. Confirm the manual/visual queue is enumerated.
-5. Write `verdict.md` from `templates/verdict.md` — your only write.
+5. Produce `verdict.md` from `templates/verdict.md`. In a writable context
+   that file is your only write; in a read-only sandbox (the emitted Codex
+   verifier) return the full verdict body instead, and the caller transcribes
+   it verbatim into the loop folder.
 6. Overall: `approve` only when every automated row passes and nothing
    blocking remains; otherwise `reject` with severity-ordered findings, or
    `cannot-verify` with what was missing.

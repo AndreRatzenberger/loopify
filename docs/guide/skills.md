@@ -121,7 +121,8 @@ claim. Two modes, one skill.
   a human accepts it.
 - **When to use (verifier mode):** a loop requests verification per its contract's
   `## Verification` section. In this mode the skill re-runs the gate itself,
-  grades every evidence-map row, and writes `verdict.md` — its only write —
+  grades every evidence-map row, and produces `verdict.md` — its only output
+  artifact; a read-only verifier returns the body for the caller to transcribe —
   ending in `approve` / `reject` / `cannot-verify`.
 - **When not to use:** never rubber-stamp passing tests; never bury findings below
   a summary; never treat missing evidence as low-risk by default.

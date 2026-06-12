@@ -7,6 +7,8 @@ import { fileURLToPath } from "node:url";
 const ROOT = fileURLToPath(new URL("..", import.meta.url));
 const CHECK = join(ROOT, "plugins/loopify/skills/loopify-run/scripts/check-stop-reason.mjs");
 const EMIT = join(ROOT, "plugins/loopify/skills/loopify-review/scripts/emit-verifier-agent.mjs");
+const CHECK_CONTRACT = join(ROOT, "plugins/loopify/skills/loopify-spec/scripts/check-loop-contract.mjs");
+const CHECK_TRACE = join(ROOT, "plugins/loopify/skills/loopify-trace/scripts/check-trace.mjs");
 
 const dirs = [];
 
@@ -89,6 +91,15 @@ try {
     `# Verdict\n\n- Verifier: verifier-model-b\n\nsee ## Overall\napprove\n\n## Overall\n\nreject\n`);
   expectExit("inline-decoy Overall, real verdict reject", [CHECK, inlineDecoy, "success"], 1);
 
+  const templateOverall = loopFixture({ stopReason: "success", maker: "maker-model-a", verifier: "verifier-model-b", overall: "approve | reject | cannot-verify" });
+  expectExit("unedited template Overall line is not approval", [CHECK, templateOverall, "success"], 1);
+
+  const proseOverall = loopFixture({ stopReason: "success", maker: "maker-model-a", verifier: "verifier-model-b", overall: "approve\nbut only because the gate was green" });
+  expectExit("Overall with trailing prose is ambiguous", [CHECK, proseOverall, "success"], 1);
+
+  const successTraceMismatch = loopFixture({ stopReason: "success", maker: "maker-model-a", verifier: "verifier-model-b", overall: "approve", traceReason: "blocked" });
+  expectExit("success claim with blocked trace final section", [CHECK, successTraceMismatch, "success"], 1);
+
   const softHyphen = loopFixture({ stopReason: "success", maker: "makerbot", verifier: "maker\u00ADbot", overall: "approve" });
   expectExit("soft-hyphen-disguised identical identity", [CHECK, softHyphen, "success"], 1);
 
@@ -116,6 +127,30 @@ try {
     );
   }
   console.log("ok: relative-folder success runs the gate (regression for path double-nesting)");
+
+  // Structure validators must require anchored heading/field lines, not
+  // token mentions buried in prose.
+  const proseDir = mkdtempSync(join(tmpdir(), "loopify-prose-"));
+  dirs.push(proseDir);
+  const contractProse = join(proseDir, "fake-contract.md");
+  writeFileSync(contractProse,
+    "This essay mentions # Loop Contract and ## Source Spec and ## Objective and " +
+    "## Requirements and ## Non-Goals and ## Requirement Evidence Map and " +
+    "## Automated Checks and ## Manual / Visual Review Items and ## Allowed Changes and " +
+    "## Authority Boundaries and ## Loop Procedure and ## Stop Conditions and " +
+    "## Blocked Conditions and ## Verification and ## Trace Requirements and " +
+    "## Final Report Requirements without being a contract.\n");
+  expectExit("prose mentioning contract headings is not a contract", [CHECK_CONTRACT, contractProse], 1);
+  expectExit("real contract template still passes anchored check",
+    [CHECK_CONTRACT, join(ROOT, "plugins/loopify/skills/loopify-spec/templates/loop-contract.md")], 0);
+
+  const traceProse = join(proseDir, "fake-trace.md");
+  writeFileSync(traceProse,
+    "Notes mentioning # Loop Trace, ## Turn, Command:, Result:, Next check:, " +
+    "## Final and Stop reason: in one prose line.\n");
+  expectExit("prose mentioning trace tokens is not a trace", [CHECK_TRACE, traceProse], 1);
+  expectExit("real trace template still passes anchored check",
+    [CHECK_TRACE, join(ROOT, "plugins/loopify/skills/loopify-trace/templates/trace.md")], 0);
 
   const host = mkdtempSync(join(tmpdir(), "loopify-host-"));
   dirs.push(host);

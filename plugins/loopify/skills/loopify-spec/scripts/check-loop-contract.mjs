@@ -25,9 +25,17 @@ export function checkLoopContract(path) {
     throw new Error(`Missing Loop Contract: ${path}`);
   }
   const text = readFileSync(path, "utf8");
+  // Anchored: a required heading only counts as a full heading line.
+  // Substring matching let prose that merely mentioned the tokens pass.
+  const headingLines = new Set(
+    text
+      .split(/\r?\n/)
+      .map((line) => line.replace(/[ \t]+$/, ""))
+      .filter((line) => /^#{1,6}[ \t]/.test(line)),
+  );
   for (const heading of REQUIRED_CONTRACT_HEADINGS) {
-    if (!text.includes(heading)) {
-      throw new Error(`${path} missing ${heading}`);
+    if (!headingLines.has(heading)) {
+      throw new Error(`${path} missing heading line ${heading}`);
     }
   }
   console.log(`Loop Contract headings passed: ${path}`);

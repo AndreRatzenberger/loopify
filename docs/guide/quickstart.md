@@ -94,8 +94,9 @@ when a loop bites back (see the [Skills Reference](skills.md)).
 
 In Loopify, **the agent that did the work does not get to declare it done.**
 `success` is only legal once an *independent* verifier — a different model, a
-fresh read-only context, or a human — re-runs the checks and writes an approving
-`verdict.md`. The stop claim is then machine-checked:
+fresh read-only context, or a human — re-runs the checks and produces an
+approving `verdict.md` (a read-only verifier returns the verdict body and the
+caller transcribes it verbatim). The stop claim is then machine-checked:
 
 ```bash
 node plugins/loopify/skills/loopify-run/scripts/check-stop-reason.mjs .loopify/loops/001-first-loop success

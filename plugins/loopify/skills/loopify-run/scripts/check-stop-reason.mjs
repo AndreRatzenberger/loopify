@@ -8,8 +8,10 @@
 // future versions corroborate blocked claims against it; absence changes nothing.
 // The maker/verifier comparison is a TRIPWIRE against sloppy self-
 // certification, not proof of independence — a lying maker can write any
-// name. Real enforcement is the write-authority boundary on verdict.md
-// (contract denial + emit-verifier-agent's read-only sandbox).
+// name. Real enforcement is the write-authority boundary on verdict.md:
+// the contract denies the maker authorship, and emit-verifier-agent's
+// read-only Codex verifier produces the verdict body without any file
+// write — the caller transcribes it verbatim.
 import { existsSync, lstatSync, readFileSync, statSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { spawnSync } from "node:child_process";
@@ -62,16 +64,37 @@ if (!reported.toLowerCase().startsWith(claimed)) {
   fail(`final-report.md says "${reported || "nothing"}", claim is "${claimed}"`);
 }
 
+// Every claim — success included — must match the trace's final section.
+// A success final-report over a blocked trace is a forged receipt.
+const trace = read("trace.md");
+const traceSections = trace.split(/^##[ \t]/m);
+const traceFinal = (traceSections[traceSections.length - 1] ?? "").toLowerCase();
+if (!traceFinal.includes(`stop reason: ${claimed}`)) {
+  fail(`trace.md's final section does not name "Stop reason: ${claimed}"`);
+}
+
 if (claimed === "success") {
   const verdict = read("verdict.md");
   const overallHeadings = [...verdict.matchAll(/^##[ \t]*Overall[ \t]*$/gim)];
   if (overallHeadings.length !== 1) {
     fail(`verdict.md must contain exactly one "## Overall" section (found ${overallHeadings.length})`);
   }
+  // The section body must be exactly one non-empty line holding a bare
+  // verdict. First-token parsing would read the unedited template line
+  // "approve | reject | cannot-verify" as approval.
   const afterHeading = verdict.slice(overallHeadings[0].index + overallHeadings[0][0].length);
-  const overall = (afterHeading.match(/^[ \t]*([a-z-]+)/im) ?? [])[1]?.toLowerCase() ?? "";
+  const nextHeading = afterHeading.search(/^#{1,6}([ \t]|$)/m);
+  const overallBody = nextHeading === -1 ? afterHeading : afterHeading.slice(0, nextHeading);
+  const overallLines = overallBody.split(/\r?\n/).map((line) => line.trim()).filter(Boolean);
+  if (overallLines.length !== 1) {
+    fail(`verdict.md "## Overall" must contain exactly one non-empty line — the bare verdict (found ${overallLines.length})`);
+  }
+  const overall = overallLines[0].toLowerCase();
+  if (!["approve", "reject", "cannot-verify"].includes(overall)) {
+    fail(`verdict.md Overall is "${overallLines[0]}" — write exactly approve, reject, or cannot-verify (an unedited template line is not a verdict)`);
+  }
   if (overall !== "approve") {
-    fail(`verdict.md Overall is "${overall || "missing"}", success needs "approve"`);
+    fail(`verdict.md Overall is "${overall}", success needs "approve"`);
   }
   const verifier = normalizeIdentity(field(verdict, "Verifier"));
   if (!verifier) fail("verdict.md names no Verifier");
@@ -97,13 +120,6 @@ if (claimed === "success") {
     console.warn(
       "WARNING: no quality-gate.sh in loop folder — automated evidence was not re-verified here; the verdict's re-executed checks are the only automated proof",
     );
-  }
-} else {
-  const trace = read("trace.md");
-  const sections = trace.split(/^##[ \t]/m);
-  const finalSection = (sections[sections.length - 1] ?? "").toLowerCase();
-  if (!finalSection.includes(`stop reason: ${claimed}`)) {
-    fail(`trace.md's final section does not name "Stop reason: ${claimed}"`);
   }
 }
 
