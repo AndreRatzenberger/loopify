@@ -58,6 +58,7 @@ const requiredMaterials = {
     "references/review-rubric.md",
     "templates/review-report.md",
     "templates/verdict.md",
+    "scripts/emit-verifier-agent.mjs",
   ],
   "loopify-debug": [
     "references/stuck-loop-taxonomy.md",
