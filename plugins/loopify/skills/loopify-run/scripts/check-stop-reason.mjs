@@ -22,13 +22,14 @@ const PLACEHOLDER_IDENTITIES = new Set([
   "<verifier>", "<verifier-name>", "<maker>",
 ]);
 
-// Strips zero-width/bidi/invisible formatting characters
-// (U+200B-U+200F, U+202A-U+202E, U+2060-U+206F, U+FEFF) after NFKC,
-// so visually identical identities compare equal.
+// Strips all control + format characters (\p{Cc}\p{Cf}: C0/C1 controls, NUL,
+// soft hyphen U+00AD, zero-width/bidi U+200B-U+200F/U+202A-U+202E/U+2060-U+206F,
+// BOM U+FEFF) plus default-ignorable fillers (CGJ, Hangul/Khmer/Mongolian
+// fillers) after NFKC, so visually identical identities compare equal.
 function normalizeIdentity(value) {
   return value
     .normalize("NFKC")
-    .replace(/[\u200B-\u200F\u202A-\u202E\u2060-\u206F\uFEFF]/g, "")
+    .replace(/[\p{Cc}\p{Cf}\u034F\u115F\u1160\u17B4\u17B5\u180E\u3164\uFFA0]/gu, "")
     .replace(/\s+/g, " ")
     .trim()
     .toLowerCase();
@@ -67,8 +68,9 @@ if (claimed === "success") {
   if (overallHeadings.length !== 1) {
     fail(`verdict.md must contain exactly one "## Overall" section (found ${overallHeadings.length})`);
   }
-  const overall = (verdict.match(/##[ \t]*Overall[ \t]*[\r\n]+[ \t]*([a-z-]+)/i) ?? [])[1] ?? "";
-  if (overall.toLowerCase() !== "approve") {
+  const afterHeading = verdict.slice(overallHeadings[0].index + overallHeadings[0][0].length);
+  const overall = (afterHeading.match(/^[ \t]*([a-z-]+)/im) ?? [])[1]?.toLowerCase() ?? "";
+  if (overall !== "approve") {
     fail(`verdict.md Overall is "${overall || "missing"}", success needs "approve"`);
   }
   const verifier = normalizeIdentity(field(verdict, "Verifier"));

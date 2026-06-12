@@ -84,6 +84,14 @@ try {
   writeFileSync(join(emptyGate, "quality-gate.sh"), "");
   expectExit("empty gate file is deception", [CHECK, emptyGate, "success"], 1);
 
+  const inlineDecoy = loopFixture({ stopReason: "success", maker: "maker-model-a", verifier: "verifier-model-b", overall: "approve" });
+  writeFileSync(join(inlineDecoy, "verdict.md"),
+    `# Verdict\n\n- Verifier: verifier-model-b\n\nsee ## Overall\napprove\n\n## Overall\n\nreject\n`);
+  expectExit("inline-decoy Overall, real verdict reject", [CHECK, inlineDecoy, "success"], 1);
+
+  const softHyphen = loopFixture({ stopReason: "success", maker: "makerbot", verifier: "maker\u00ADbot", overall: "approve" });
+  expectExit("soft-hyphen-disguised identical identity", [CHECK, softHyphen, "success"], 1);
+
   const host = mkdtempSync(join(tmpdir(), "loopify-host-"));
   dirs.push(host);
   mkdirSync(join(host, ".codex"));
