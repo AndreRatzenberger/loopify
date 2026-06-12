@@ -212,6 +212,17 @@ tools when the loop bites back.
 
 ---
 
+## 📚 Documentation
+
+The full user guide lives in [`docs/guide/`](docs/guide/index.md):
+
+- **[Quick Start](docs/guide/quickstart.md)** — install, then a running loop in three steps.
+- **[Core Concepts](docs/guide/core-concepts.md)** — Loop Contracts, evidence classes, stop reasons, mandatory verification, the `.loopify/` directory.
+- **[Skills Reference](docs/guide/skills.md)** — all 11 skills: when to use each, when not to, what they produce.
+- **[Workflows](docs/guide/workflows.md)** — end-to-end recipes from spec to verified success.
+
+---
+
 ## 🧪 Try the PaperTrail Stress Fixture
 
 The repo includes a deliberately chunky app request:
