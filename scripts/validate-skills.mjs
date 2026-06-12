@@ -42,6 +42,7 @@ const requiredMaterials = {
     "references/loop-execution-protocol.md",
     "templates/run-final-report.md",
     "scripts/summarize-trace.mjs",
+    "scripts/check-stop-reason.mjs",
   ],
   "loopify-checks": [
     "references/check-patterns.md",
