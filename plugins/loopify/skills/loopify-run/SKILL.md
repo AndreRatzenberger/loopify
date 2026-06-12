@@ -42,8 +42,8 @@ Execute a loop from an existing loop directory or Loop Contract.
     stop `escalated`. On cannot-verify: stop `escalated`.
 12. Write `final-report.md` with `Maker:` identity and a `Verdict:` link.
 13. Stop with `success` (requires an approving verdict), `blocked`,
-    `escalated`, or `budget-exhausted`, and validate the claim:
-    `node <plugin>/skills/loopify-run/scripts/check-stop-reason.mjs <loop-folder> <reason>`
+    `escalated`, or `budget-exhausted`, and validate the claim with
+    `check-stop-reason.mjs <loop-folder> <reason>`.
 
 ## Output
 
