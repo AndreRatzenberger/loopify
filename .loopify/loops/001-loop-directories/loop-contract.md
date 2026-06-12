@@ -77,6 +77,18 @@ and root loop state.
 Stop `blocked` if validators cannot support hidden `.loopify` fixtures or if
 the new layout conflicts with plugin packaging rules.
 
+## Verification
+
+- Verifier: independent reviewer in a fresh context (different model preferred)
+- Independence level: fresh-context
+- Verifier inputs: loop-contract.md, trace.md, the diff, quality gate output
+- Verifier authority: read everything in scope, re-run checks; writes ONLY verdict.md
+- Verdict location: ./verdict.md
+- Minimum independence for this loop: fresh-context
+
+Retroactive note: this loop closed before mandatory verification (v0.2.0);
+no verdict is required retroactively.
+
 ## Trace Requirements
 
 Record commands, results, failures, patches, and final stop reason in

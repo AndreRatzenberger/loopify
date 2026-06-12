@@ -56,6 +56,15 @@ Stop when required sections exist and source audit passes.
 
 Stop blocked if a critical claim cannot be sourced.
 
+## Verification
+
+- Verifier: independent reviewer in a fresh context (different model preferred)
+- Independence level: fresh-context
+- Verifier inputs: loop-contract.md, trace.md, the diff, quality gate output
+- Verifier authority: read everything in scope, re-run checks; writes ONLY verdict.md
+- Verdict location: ./verdict.md
+- Minimum independence for this loop: fresh-context
+
 ## Trace Requirements
 
 Record claim changes and source decisions.

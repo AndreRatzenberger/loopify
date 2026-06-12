@@ -1,4 +1,5 @@
 import { existsSync, readFileSync } from "node:fs";
+import { REQUIRED_CONTRACT_HEADINGS } from "../plugins/loopify/skills/loopify-spec/scripts/check-loop-contract.mjs";
 
 const required = [
   "docs/examples/simple-web-app/spec.md",
@@ -46,23 +47,6 @@ for (const path of required) {
   }
 }
 
-const headings = [
-  "## Source Spec",
-  "## Objective",
-  "## Requirements",
-  "## Non-Goals",
-  "## Requirement Evidence Map",
-  "## Automated Checks",
-  "## Manual / Visual Review Items",
-  "## Allowed Changes",
-  "## Authority Boundaries",
-  "## Loop Procedure",
-  "## Stop Conditions",
-  "## Blocked Conditions",
-  "## Trace Requirements",
-  "## Final Report Requirements",
-];
-
 for (const path of [
   "docs/examples/simple-web-app/expected-loop-contract.md",
   "docs/examples/simple-web-app/example-loop/repo/.loopify/loops/001-tiny-events/loop-contract.md",
@@ -72,7 +56,7 @@ for (const path of [
   ".loopify/loops/001-loop-directories/loop-contract.md",
 ]) {
   const text = readFileSync(path, "utf8");
-  for (const heading of headings) {
+  for (const heading of REQUIRED_CONTRACT_HEADINGS) {
     if (!text.includes(heading)) {
       throw new Error(`${path} missing ${heading}`);
     }

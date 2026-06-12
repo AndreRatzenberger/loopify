@@ -65,6 +65,15 @@ recorded.
 Stop `blocked` if browser dependencies are unavailable or the same failure
 signature repeats after three distinct hypotheses.
 
+## Verification
+
+- Verifier: independent reviewer in a fresh context (different model preferred)
+- Independence level: fresh-context
+- Verifier inputs: loop-contract.md, trace.md, the diff, quality gate output
+- Verifier authority: read everything in scope, re-run checks; writes ONLY verdict.md
+- Verdict location: ./verdict.md
+- Minimum independence for this loop: fresh-context
+
 ## Trace Requirements
 
 Record each command, result, failure, patch, rationale, and next check in

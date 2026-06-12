@@ -125,6 +125,15 @@ extensive logging, and documented manual Playwright testing.
 - The chosen frontend/backend stack prevents a required data flow without a
   scope decision.
 
+## Verification
+
+- Verifier: independent reviewer in a fresh context (different model preferred)
+- Independence level: fresh-context
+- Verifier inputs: loop-contract.md, trace.md, the diff, quality gate output
+- Verifier authority: read everything in scope, re-run checks; writes ONLY verdict.md
+- Verdict location: ./verdict.md
+- Minimum independence for this loop: fresh-context
+
 ## Trace Requirements
 
 Record every quality-gate run, browser-test run, fallback scenario, manual
