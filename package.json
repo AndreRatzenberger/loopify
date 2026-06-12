@@ -1,12 +1,13 @@
 {
   "name": "loopify",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "type": "module",
   "scripts": {
     "validate:manifests": "node scripts/validate-manifests.mjs",
     "validate:skills": "node scripts/validate-skills.mjs",
     "smoke:examples": "node scripts/smoke-test-examples.mjs",
-    "quality": "npm run validate:manifests && npm run validate:skills && npm run smoke:examples"
+    "smoke:verification": "node scripts/smoke-test-verification.mjs",
+    "quality": "npm run validate:manifests && npm run validate:skills && npm run smoke:examples && npm run smoke:verification"
   }
 }

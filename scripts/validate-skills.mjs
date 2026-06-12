@@ -1,7 +1,7 @@
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 
-const skillsRoot = "plugins/loopify-agent-skills/skills";
+const skillsRoot = "plugins/loopify/skills";
 const requiredSkills = [
   "loopify-spec",
   "loopify-bootstrap",
@@ -42,6 +42,7 @@ const requiredMaterials = {
     "references/loop-execution-protocol.md",
     "templates/run-final-report.md",
     "scripts/summarize-trace.mjs",
+    "scripts/check-stop-reason.mjs",
   ],
   "loopify-checks": [
     "references/check-patterns.md",
@@ -56,7 +57,10 @@ const requiredMaterials = {
   ],
   "loopify-review": [
     "references/review-rubric.md",
+    "references/independent-verification.md",
     "templates/review-report.md",
+    "templates/verdict.md",
+    "scripts/emit-verifier-agent.mjs",
   ],
   "loopify-debug": [
     "references/stuck-loop-taxonomy.md",

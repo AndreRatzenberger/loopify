@@ -82,3 +82,27 @@ or memory without approval.
 
 Mitigations: harness-change contracts, review gates, rollback plans, and
 recorded approvals.
+
+## Self-Graded Success
+
+The maker declares done on its own authority. Completion bias makes this the
+default failure, not the exception: the model that produced the work is
+structurally the worst judge of whether it is finished. Mitigation: the
+contract's Verification section plus `check-stop-reason.mjs` — success
+requires an approving verdict from an independent context.
+
+## Verifier Capture
+
+The verifier rubber-stamps because it grades the maker's narrative instead of
+reality: it reads the trace, believes the claims, and approves. Mitigation:
+the verifier re-executes checks itself, cites evidence per requirement, and
+is re-rolled only for infrastructure failures — never until it approves.
+
+## Forgeable Verdict
+
+A static check of the verdict file cannot prove who authored it: a maker can
+write an approving verdict under a fabricated verifier name and pass the stop
+check. The mitigation is not a stronger string match (none can close this) but
+honesty plus reproduction — the checker is a tripwire, the verdict carries a
+self-declared provenance line, and the automated evidence is re-runnable by
+anyone, so a forgery is caught on the next independent verification.

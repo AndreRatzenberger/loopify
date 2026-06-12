@@ -33,6 +33,7 @@ The contract answers seven questions the prompt usually dodges:
 ## Loop Procedure
 ## Stop Conditions
 ## Blocked Conditions
+## Verification
 ## Trace Requirements
 ## Final Report Requirements
 ```
@@ -72,6 +73,28 @@ wire forever:
 - dependency installation is impossible in the current environment
 - spec contradiction prevents choosing a safe implementation
 - authority boundary forbids the next required action
+
+## Verification Section
+
+The contract names who is allowed to grade `success` — and it is never the
+maker. The independence ladder, strongest first: **cross-model** (different
+model, different harness), **fresh-context** (same model, new context window,
+harness-enforced read-only where possible), **human**. The verifier re-runs
+the checks, grades every evidence-map row, and writes `verdict.md` — the one
+file the maker's Allowed Changes always denies. `success` without an
+approving verdict is an illegal stop claim (`check-stop-reason.mjs` exits 1).
+Same finding rejected twice → `escalated`; no verifier available →
+`escalated` (`cannot-verify`).
+
+What the check proves, and what it does not: `check-stop-reason.mjs` confirms
+that an approving `verdict.md` exists, names a verifier distinct from the maker,
+and that the gate re-runs green. It cannot prove *who authored* the verdict — a
+static check of a text file never can. The real guarantee has two parts: the
+automated evidence in a verdict is **reproducible** (anyone can re-run the gate
+on any machine, and a forged result dies the moment they do), and the judgment
+evidence (frame review, manual items) requires a **named independent judge**
+each time. The checker is a tripwire against sloppy self-certification;
+reproduction and an independent judge are the teeth.
 
 ## Example Evidence Map
 

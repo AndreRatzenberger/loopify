@@ -1,6 +1,8 @@
 # Final Report
 
 - Stop reason: success
+- Maker: example maker session
+- Verdict: ./verdict.md (approve, fresh-context)
 - Loop directory: `.loopify/loops/001-tiny-events/`
 - Contract: `loop-contract.md`
 - Trace: `trace.md`

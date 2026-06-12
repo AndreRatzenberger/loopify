@@ -5,13 +5,13 @@
   },
   "metadata": {
     "description": "Loopify - skills for converting specs into executable feedback loops with checks, traces, governance, and demos",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "homepage": "https://github.com/AndreRatzenberger/loopify"
   },
   "plugins": [
     {
-      "name": "loopify-agent-skills",
-      "source": "./plugins/loopify-agent-skills",
+      "name": "loopify",
+      "source": "./plugins/loopify",
       "description": "Skills for loopifying specs, bootstrapping loop materials, running loop contracts, designing checks, maintaining traces, reviewing loops, debugging stuck loops, building demos, using Codex SDK actuators, extracting retros, and adding governance."
     }
   ]

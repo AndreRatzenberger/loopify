@@ -62,6 +62,15 @@ Stop on passing build and Playwright checks plus visual review.
 Stop blocked if browser dependencies are unavailable and cannot be installed in
 the disposable environment.
 
+## Verification
+
+- Verifier: independent reviewer in a fresh context (different model preferred)
+- Independence level: fresh-context
+- Verifier inputs: loop-contract.md, trace.md, the diff, quality gate output
+- Verifier authority: read everything in scope, re-run checks; writes ONLY verdict.md
+- Verdict location: ./verdict.md
+- Minimum independence for this loop: fresh-context
+
 ## Trace Requirements
 
 Record each check, failure, patch, and stop reason.

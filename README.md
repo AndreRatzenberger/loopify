@@ -42,7 +42,7 @@ Codex CLI:
 
 ```bash
 codex plugin marketplace add AndreRatzenberger/loopify
-codex plugin add loopify-agent-skills@loopify
+codex plugin add loopify@loopify
 ```
 
 Or browse it interactively:
@@ -62,13 +62,18 @@ Claude Code/Github Copilot:
 
 ```text
 /plugin marketplace add AndreRatzenberger/loopify
-/plugin install loopify-agent-skills@loopify
+/plugin install loopify@loopify
 ```
+
+> Upgrading from 0.1.x? The plugin was renamed: uninstall
+> `loopify-agent-skills@loopify`, then install `loopify@loopify`. Your
+> `.loopify/` folders are unaffected — the plugin name is not part of any
+> loop artifact.
 
 Other agent harnesses: Ask your bot.
 
 Give it https://github.com/AndreRatzenberger/loopify and ask it to install or
-load the `loopify-agent-skills` bundle.
+load the `loopify` bundle.
 
 **2. Turn a spec into a loop folder**
 
@@ -193,7 +198,7 @@ The `loopify-spec -> loopify-bootstrap` edge is explicit. Say "bootstrap it" or
 | `loopify-run` | Executes a loop folder by checking, patching, rerunning, and tracing. |
 | `loopify-checks` | Turns vague requirements into honest evidence. |
 | `loopify-trace` | Keeps receipts across attempts. |
-| `loopify-review` | Audits contracts, traces, done claims, and residual risk. |
+| `loopify-review` | Audits contracts, traces, done claims, and residual risk — and acts as the independent verifier that writes `verdict.md`. |
 | `loopify-debug` | Rescues stuck loops before they become doom spirals. |
 | `loopify-demo` | Builds public-safe demo material packs. |
 | `loopify-codex-sdk` | Treats Codex SDK calls as actuators inside a larger loop. |
@@ -204,6 +209,17 @@ Each skill keeps its `SKILL.md` lean. Deeper guidance lives in `references/`;
 copyable output shapes live in `templates/`; deterministic helpers live in
 `scripts/`. The agent sees the short path first and can reach for the heavy
 tools when the loop bites back.
+
+---
+
+## 📚 Documentation
+
+The full user guide lives in [`docs/guide/`](docs/guide/index.md):
+
+- **[Quick Start](docs/guide/quickstart.md)** — install, then a running loop in three steps.
+- **[Core Concepts](docs/guide/core-concepts.md)** — Loop Contracts, evidence classes, stop reasons, mandatory verification, the `.loopify/` directory.
+- **[Skills Reference](docs/guide/skills.md)** — all 11 skills: when to use each, when not to, what they produce.
+- **[Workflows](docs/guide/workflows.md)** — end-to-end recipes from spec to verified success.
 
 ---
 
@@ -245,6 +261,11 @@ Every loop stops with one of four reasons:
 - `blocked`: the same blocker repeats or a required dependency is unavailable.
 - `escalated`: a human decision is required.
 - `budget-exhausted`: the contract's turn, time, retry, or cost budget is done.
+
+And one rule above the four: **the maker never grades its own homework.**
+`success` is only legal with an approving `verdict.md` written by an
+independent verifier — a different model, a fresh read-only context, or a
+human. The stop claim is sanity-checked by `check-stop-reason.mjs` — a tripwire, not proof of authorship. The real guarantee is that a verdict's automated evidence is reproducible by anyone, so a faked verdict dies on the next independent re-run.
 
 A loop without stop rules is not autonomy. It is an expensive `while true`
 wearing a cape.
@@ -300,7 +321,7 @@ loopify/
 │   ├── examples/
 │   └── goals/
 ├── plugins/
-│   └── loopify-agent-skills/
+│   └── loopify/
 │       ├── .claude-plugin/plugin.json
 │       ├── README.md
 │       └── skills/
