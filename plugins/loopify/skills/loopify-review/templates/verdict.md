@@ -12,6 +12,8 @@
 
 ## Requirement Verdicts
 
+One row per contract Requirement Evidence Map entry.
+
 | Requirement | Evidence class | Verdict (pass / fail / cannot-verify) | Note |
 | --- | --- | --- | --- |
 
