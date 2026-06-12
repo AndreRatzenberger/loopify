@@ -2,7 +2,7 @@
 
 - Stop reason: success
 - Maker: subagent-driven implementation session (Claude Fable 5)
-- Verdict: ./verdict.md (approve, cross-model — Codie/GPT-5.4 via Codex, @ 87456a5)
+- Verdict: ./verdict.md (approve, cross-model — Codie/GPT-5.4 via Codex; rounds 1-3 in git history, round-3 re-confirmed against the post-fix HEAD)
 - Loop directory: .loopify/loops/002-mandatory-verifier/
 - Contract: ./loop-contract.md
 - Trace: ./trace.md

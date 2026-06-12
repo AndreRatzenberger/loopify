@@ -124,5 +124,5 @@
 
 - Stop reason: success
 - Passing command: npm run quality
-- Evidence: all validators green incl. 16 verification smoke fixtures; independent cross-model verdict APPROVE (Codie/GPT-5.4, verdict.md @ 87456a5); check-stop-reason success → exit 0
+- Evidence: all validators green incl. 18 verification smoke fixtures; independent cross-model verdict APPROVE, re-confirmed round 3 against the post-fix HEAD (Codie/GPT-5.4, verdict.md); check-stop-reason success → exit 0
 - Remaining caveats: success rests on a real independent cross-model verdict, not the maker's say-so; round 1 was REJECT (d20b023), remediated via Path A; check-stop-reason stays a documented tripwire — a dishonest maker could forge a different-name verdict, a named limitation rather than a defect
