@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync, readFileSync, realpathSync } from "node:fs";
 
 export const REQUIRED_CONTRACT_HEADINGS = [
   "# Loop Contract",
@@ -33,6 +33,6 @@ export function checkLoopContract(path) {
   console.log(`Loop Contract headings passed: ${path}`);
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (process.argv[1] && import.meta.url === `file://${realpathSync(process.argv[1])}`) {
   checkLoopContract(process.argv[2] ?? ".loopify/loops/001-example/loop-contract.md");
 }
