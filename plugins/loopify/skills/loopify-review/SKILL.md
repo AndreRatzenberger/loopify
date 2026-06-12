@@ -1,6 +1,6 @@
 ---
 name: loopify-review
-description: "Use when auditing a Loop Contract, loop trace, quality gate, or done claim for weak evidence, missing checks, authority creep, ambiguity, and residual risk."
+description: "Use when auditing a Loop Contract, trace, quality gate, or done claim — or when acting as the independent verifier that grades a loop's success claim and writes verdict.md."
 ---
 
 # loopify-review
@@ -13,6 +13,8 @@ Review a loop before or after execution.
 - A quality gate may be incomplete.
 - A contract may have weak evidence or broad authority.
 - A trace needs review before a human accepts the result.
+- A loop requests verification per its contract's `## Verification` section
+  (verifier mode).
 
 ## Do Not Use
 
@@ -29,6 +31,20 @@ Review a loop before or after execution.
 4. Present findings first, ordered by severity.
 5. Recommend concrete contract/check/trace fixes.
 
+## Verifier Mode
+
+When invoked as the independent verifier (never the maker's session):
+
+1. Read `references/independent-verification.md` and the loop folder's
+   contract, trace, and diff.
+2. Re-run the quality gate and the contract's cheap checks yourself.
+3. Grade every Requirement Evidence Map row pass/fail/cannot-verify.
+4. Confirm the manual/visual queue is enumerated.
+5. Write `verdict.md` from `templates/verdict.md` — your only write.
+6. Overall: `approve` only when every automated row passes and nothing
+   blocking remains; otherwise `reject` with severity-ordered findings, or
+   `cannot-verify` with what was missing.
+
 ## Output
 
 A review report using `templates/review-report.md`.
@@ -38,6 +54,8 @@ A review report using `templates/review-report.md`.
 - Findings are severity-ordered and path-grounded when possible.
 - Residual risk is explicit.
 - The verdict states whether the work is allowed to count.
+- Verifier mode: `verdict.md` exists, names the verifier and independence
+  level, and every Overall=approve is backed by re-executed checks.
 
 ## Example
 

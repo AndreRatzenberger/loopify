@@ -57,6 +57,7 @@ const requiredMaterials = {
   ],
   "loopify-review": [
     "references/review-rubric.md",
+    "references/independent-verification.md",
     "templates/review-report.md",
     "templates/verdict.md",
     "scripts/emit-verifier-agent.mjs",
