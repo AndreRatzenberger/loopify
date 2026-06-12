@@ -11,7 +11,7 @@
 // name. Real enforcement is the write-authority boundary on verdict.md
 // (contract denial + emit-verifier-agent's read-only sandbox).
 import { existsSync, lstatSync, readFileSync, statSync } from "node:fs";
-import { join } from "node:path";
+import { join, resolve } from "node:path";
 import { spawnSync } from "node:child_process";
 
 const [folder, claimed] = process.argv.slice(2);
@@ -91,7 +91,7 @@ if (claimed === "success") {
     if (!lstatSync(gate).isFile() || statSync(gate).size === 0) {
       fail("quality-gate.sh exists but is not a regular non-empty file");
     }
-    const run = spawnSync("bash", [gate], { stdio: "inherit", cwd: folder });
+    const run = spawnSync("bash", [resolve(gate)], { stdio: "inherit", cwd: resolve(folder) });
     if (run.status !== 0) fail(`quality-gate.sh exited ${run.status}`);
   } else {
     console.warn(

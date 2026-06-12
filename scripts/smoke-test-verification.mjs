@@ -92,6 +92,31 @@ try {
   const softHyphen = loopFixture({ stopReason: "success", maker: "makerbot", verifier: "maker\u00ADbot", overall: "approve" });
   expectExit("soft-hyphen-disguised identical identity", [CHECK, softHyphen, "success"], 1);
 
+  // Regression fixture: success path with a RELATIVE folder argument.
+  // The absolute-path mkdtempSync fixtures above never caught the double-nesting
+  // bug where join(folder, "quality-gate.sh") was passed as the bash script arg
+  // while cwd was also set to folder \u2014 so a relative folder resolved to
+  // <folder>/<folder>/quality-gate.sh, exit 127, false ILLEGAL verdict.
+  const relParent = mkdtempSync(join(tmpdir(), "loopify-relparent-"));
+  dirs.push(relParent);
+  const relSubdir = "loop-rel-fixture";
+  const relLoopDir = join(relParent, relSubdir);
+  mkdirSync(relLoopDir);
+  writeFileSync(join(relLoopDir, "final-report.md"),
+    `# Final Report\n\n- Stop reason: success\n- Maker: maker-model-a\n- Verdict: ./verdict.md\n`);
+  writeFileSync(join(relLoopDir, "verdict.md"),
+    `# Verdict\n\n- Verifier: verifier-model-b\n- Independence level: cross-model\n\n## Overall\n\napprove\n`);
+  writeFileSync(join(relLoopDir, "trace.md"),
+    `# Loop Trace\n\n## Final\n\n- Stop reason: success\n`);
+  writeFileSync(join(relLoopDir, "quality-gate.sh"), "#!/usr/bin/env bash\nexit 0\n");
+  const relRun = spawnSync("node", [CHECK, relSubdir, "success"], { cwd: relParent, encoding: "utf8" });
+  if (relRun.status !== 0) {
+    throw new Error(
+      `relative-folder success runs the gate (regression for path double-nesting): expected exit 0, got ${relRun.status}\n${relRun.stdout}${relRun.stderr}`,
+    );
+  }
+  console.log("ok: relative-folder success runs the gate (regression for path double-nesting)");
+
   const host = mkdtempSync(join(tmpdir(), "loopify-host-"));
   dirs.push(host);
   mkdirSync(join(host, ".codex"));
