@@ -95,6 +95,27 @@ If no level on the ladder is available, the loop cannot reach `success`; it stop
 `loopify-spec` writes this section when compiling contracts;
 `check-loop-contract.mjs` adds `## Verification` to its required-headings list.
 
+**Host-enforced verifier contexts (hardening for the fresh-context rung).**
+Where the host harness supports project-level subagent definitions, the
+verifier role should be *enforced by the harness*, not just instructed by
+prose. A helper (`loopify-review/scripts/emit-verifier-agent.mjs`) emits a
+read-only verifier agent definition in the host's native format from one
+neutral role description:
+
+- `.codex/` present → `.codex/agents/loop-verifier.toml` with
+  `sandbox_mode = "read-only"` (the sandbox, not the prompt, guarantees the
+  verifier cannot write anything but its verdict)
+- `.claude/` present → `.claude/agents/loopify-verifier.md` with a read-only
+  tool allowlist
+- neither → prose fallback: spawn a fresh sub-agent with read+execute-checks
+  instructions only
+
+This pattern is adapted, with attribution, from Sanket Dongre's
+loop-codex-plugin (MIT), whose read-only verifier TOML demonstrated that the
+maker/checker authority boundary can be a harness guarantee instead of a
+contract plea. The emitted file is created once per repo (never overwritten if
+present) and referenced from the contract's `## Verification` section.
+
 ### 2. Verdict artifact: `verdict.md`
 
 One file per loop folder, written only by the verifier. Template ships in
@@ -191,6 +212,13 @@ Exit 0 = legal claim, exit 1 = illegal, with a one-line reason. This is the same
 move the rest of Loopify makes everywhere else: relocate trust from prose to an
 exit code.
 
+Forward compatibility: a companion design
+(`2026-06-12-harness-absorption-design.md`) introduces a per-loop
+`runs.jsonl` ledger with a repeated-failure detector. `check-stop-reason.mjs`
+is designed to consume that ledger *when present* (e.g. corroborating a
+`blocked` claim with ≥3 recorded same-reason failures) but must not depend on
+it — verdict, gate, and final report remain sufficient on their own.
+
 ### 5. `loopify-review`: the verifier role, absorbed
 
 `loopify-review` already owns audit. It gains an explicit second mode:
@@ -272,6 +300,7 @@ are harness-generic; no plugin is a hard dependency.
 | `plugins/.../loopify-review/SKILL.md` | add verifier mode |
 | `plugins/.../loopify-review/templates/verdict.md` | new |
 | `plugins/.../loopify-review/references/independent-verification.md` | new |
+| `plugins/.../loopify-review/scripts/emit-verifier-agent.mjs` | new — host-native read-only verifier agent emission |
 | `plugins/.../loopify-run/SKILL.md`, `references/loop-execution-protocol.md` | verification step; success gating; escalation rules |
 | `plugins/.../loopify-run/templates/run-final-report.md`, `templates/final-report.md` | verdict link field; required `Maker:` identity line |
 | `plugins/.../loopify-run/scripts/check-stop-reason.mjs` | new |
