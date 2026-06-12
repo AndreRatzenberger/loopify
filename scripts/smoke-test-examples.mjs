@@ -17,6 +17,7 @@ const required = [
   "docs/examples/simple-web-app/example-loop/repo/.loopify/loops/001-tiny-events/trace.md",
   "docs/examples/simple-web-app/example-loop/repo/.loopify/loops/001-tiny-events/final-report.md",
   "docs/examples/simple-web-app/example-loop/repo/.loopify/loops/001-tiny-events/artifacts/visual-review.md",
+  "docs/examples/simple-web-app/example-loop/repo/.loopify/loops/001-tiny-events/verdict.md",
   "docs/examples/markdown-research-note/spec.md",
   "docs/examples/markdown-research-note/expected-loop-contract.md",
   "docs/examples/stuck-loop-debug/trace.md",
@@ -92,6 +93,16 @@ const visualReview = readFileSync(
 for (const phrase of ["Before Patch", "After Patch", "quality gate still passes"]) {
   if (!visualReview.includes(phrase)) {
     throw new Error(`simple-web-app visual artifact missing ${phrase}`);
+  }
+}
+
+const exampleVerdict = readFileSync(
+  "docs/examples/simple-web-app/example-loop/repo/.loopify/loops/001-tiny-events/verdict.md",
+  "utf8",
+);
+for (const phrase of ["Independence level", "## Checks Re-Executed", "## Overall", "approve"]) {
+  if (!exampleVerdict.includes(phrase)) {
+    throw new Error(`example verdict missing ${phrase}`);
   }
 }
 

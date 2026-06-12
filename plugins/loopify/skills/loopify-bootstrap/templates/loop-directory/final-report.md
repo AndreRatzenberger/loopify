@@ -1,6 +1,8 @@
 # Final Report
 
 - Stop reason:
+- Maker:
+- Verdict:
 - Loop directory:
 - Contract:
 - Trace:

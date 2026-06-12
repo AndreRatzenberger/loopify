@@ -57,6 +57,7 @@ const requiredMaterials = {
   "loopify-review": [
     "references/review-rubric.md",
     "templates/review-report.md",
+    "templates/verdict.md",
   ],
   "loopify-debug": [
     "references/stuck-loop-taxonomy.md",
