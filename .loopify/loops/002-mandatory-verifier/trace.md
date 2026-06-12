@@ -111,9 +111,18 @@
 - Why this patch: the honest fix is to claim what is true (reproducible automated evidence + independent judge) and name the provenance assumption, not to fake enforcement
 - Next check: hand back to the independent verifier for round 2
 
+## Turn 13
+
+- Command: round-2 independent cross-model verification (Codie, GPT-5.4, Codex)
+- Result: APPROVE (verdict.md, committed 87456a5) — every row passes incl. the honesty-framing row; Path A accepted
+- Failure observed: none
+- Patch: maker flips the loop to success — final-report Stop reason → success, Verdict → ./verdict.md, index updated
+- Why this patch: an independent cross-model verdict now approves; success is finally legal and check-stop-reason confirms it
+- Next check: `node plugins/loopify/skills/loopify-run/scripts/check-stop-reason.mjs .loopify/loops/002-mandatory-verifier success` → exit 0
+
 ## Final
 
-- Stop reason: escalated
+- Stop reason: success
 - Passing command: npm run quality
-- Evidence: all validators green incl. 16 verification smoke fixtures
-- Remaining caveats: round-1 independent verdict was REJECT (d20b023); remediated via Path A; awaiting round-2 independent verdict — still escalated, the maker does not self-certify
+- Evidence: all validators green incl. 16 verification smoke fixtures; independent cross-model verdict APPROVE (Codie/GPT-5.4, verdict.md @ 87456a5); check-stop-reason success → exit 0
+- Remaining caveats: success rests on a real independent cross-model verdict, not the maker's say-so; round 1 was REJECT (d20b023), remediated via Path A; check-stop-reason stays a documented tripwire — a dishonest maker could forge a different-name verdict, a named limitation rather than a defect
