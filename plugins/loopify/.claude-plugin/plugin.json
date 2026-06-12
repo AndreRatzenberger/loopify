@@ -1,6 +1,6 @@
 {
   "name": "loopify",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Loopify agent skills for turning specs into executable feedback loops with evidence, traces, stop rules, and governance.",
   "author": {
     "name": "Andre Ratzenberger"
