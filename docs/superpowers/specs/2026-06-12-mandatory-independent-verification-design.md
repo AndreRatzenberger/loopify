@@ -252,6 +252,25 @@ are harness-generic; no plugin is a hard dependency.
 - `plugins/loopify-agent-skills/.claude-plugin/plugin.json` and
   `.claude-plugin/marketplace.json`: version 0.1.0 → 0.2.0.
 
+### 7. Plugin rename: `loopify-agent-skills` → `loopify`
+
+Ride-along with the 0.2.0 bump: the plugin loses its clunky suffix.
+
+- `plugins/loopify-agent-skills/` → `plugins/loopify/`
+- `.claude-plugin/marketplace.json`: plugin entry `name: "loopify"`, source
+  `./plugins/loopify`
+- `plugins/loopify/.claude-plugin/plugin.json`: `name: "loopify"`
+- README install lines become `/plugin install loopify@loopify` (and the
+  Codex equivalent)
+- `scripts/validate-manifests.mjs` / `validate-skills.mjs`: path and name
+  expectations updated
+- Migration note in the README for existing installs: uninstall
+  `loopify-agent-skills@loopify`, install `loopify@loopify` — settings and
+  `.loopify/` folders in consuming repos are unaffected (the plugin name is
+  not part of any loop artifact)
+- `docs/goals/goal.md` keeps the old name — it is the historical source spec,
+  not living documentation
+
 ## Error Handling and Edge Cases
 
 - **No second model available:** degrade down the ladder; the verdict records the
@@ -311,4 +330,6 @@ are harness-generic; no plugin is a hard dependency.
 | `docs/examples/simple-web-app/example-loop/` | example `verdict.md` |
 | `scripts/smoke-test-examples.mjs` | require new heading/fields |
 | `README.md` | stop rules + skill table |
-| `.claude-plugin/marketplace.json`, `plugins/.../plugin.json` | 0.2.0 |
+| `plugins/loopify-agent-skills/` → `plugins/loopify/` | directory rename |
+| `.claude-plugin/marketplace.json`, `plugins/loopify/.claude-plugin/plugin.json` | plugin name → `loopify`; version 0.1.0 → 0.2.0 |
+| `README.md`, `plugins/loopify/README.md`, `scripts/validate-*.mjs` | rename fallout: install commands, paths, migration note |
