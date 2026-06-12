@@ -70,3 +70,14 @@ When the user asks to "bootstrap it", "make this runnable", "prepare the repo",
 or "create the loop folder", `loopify-spec` should hand off to
 `loopify-bootstrap` with the chosen loop directory. Smooth workflow, no surprise
 mutation.
+
+## Verification and the verdict
+
+Each loop folder ends with a `verdict.md` written by an independent verifier,
+never by the maker (the maker's Allowed Changes always denies it). The verdict
+records who verified, at what independence level, the checks they re-ran, and
+an Overall of `approve` / `reject` / `cannot-verify`. A loop may only claim
+`success` with an approving verdict; without one it stops `escalated`. The stop
+claim is sanity-checked by `check-stop-reason.mjs`, but that check is a
+tripwire, not proof of authorship — see the Verification Section in
+`loop-contract.md` for what it can and cannot guarantee.

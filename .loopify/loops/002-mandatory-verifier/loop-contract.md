@@ -50,6 +50,7 @@ loopify.
 | check-stop-reason.mjs — 16 fixtures | automated | `smoke:verification` runs 16 adversarial fixtures incl. forged verdict, empty Maker, duplicate Overall, placeholder identities, invisible chars, gate deception, CRLF |
 | loopify-run + loopify-review docs updated | manual | Skill docs reviewed for verification-step wording |
 | concepts/README/failure-modes updated | manual | Concept doc, README, and failure-modes reviewed for mandatory-verification mentions |
+| Verification framing is honest (tripwire, not authorship proof) | manual | docs state check-stop-reason is a tripwire; independence = reproducible automated evidence + a named independent judge + a self-declared provenance line (loop-contract.md Verification Section, independent-verification.md, failure-modes.md) |
 
 ## Automated Checks
 

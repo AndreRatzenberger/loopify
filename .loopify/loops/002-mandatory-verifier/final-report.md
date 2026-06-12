@@ -10,7 +10,7 @@
 - Commands run: npm run quality; git diff --check
 - Passing command: npm run quality
 - Evidence: validators + 16 verification smoke fixtures green
-- Manual / visual review: none required
+- Manual / visual review: required — see the contract's Manual / Visual Review Items; reviewed by the independent verifier (verdict.md)
 - Remaining caveats: success may only be claimed after an independent
   verifier (different model or fresh read-only context) writes an approving
   verdict.md; this loop deliberately stops escalated because the maker must

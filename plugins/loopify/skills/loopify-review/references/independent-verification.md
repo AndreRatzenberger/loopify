@@ -46,3 +46,22 @@ No rung available → the loop cannot reach `success`; stop `escalated`
 - **Disagreement:** one re-run is allowed only for infrastructure failures
   (a check would not run). Never re-roll a verifier until it approves;
   persistent disagreement goes to a human (`escalated`).
+
+## What the static check can and cannot prove
+
+`check-stop-reason.mjs` is a tripwire, not an authorship oracle. It can confirm
+the verdict says `approve`, names a verifier different from the maker, and that
+the gate re-runs green. It cannot prove a different party actually wrote the
+verdict — a maker willing to type a false verifier name defeats the name check
+in one line. Independence is therefore not a property of the verdict file; it
+is a property of *process*:
+
+- **Automated rows** are guaranteed by reproducibility — anyone can re-run the
+  gate, and a forged pass is caught on the next independent run.
+- **Judgment rows** (frame review, manual items) are guaranteed only by a named
+  independent judge running each time; no file can stand in for that.
+
+Record how the verdict was produced in its Provenance line (what model/agent,
+in what isolation). That line is self-declared and human-audited, explicitly not
+machine-verified — naming the assumption is the honest alternative to pretending
+the checker enforces it.

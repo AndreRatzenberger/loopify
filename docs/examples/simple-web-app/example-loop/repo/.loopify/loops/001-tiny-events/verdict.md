@@ -4,6 +4,7 @@
 - Verifier: fresh-context reviewer (independent session)
 - Independence level: fresh-context
 - Date: 2026-06-12
+- Provenance (self-declared, human-audited): fresh independent session, no access to the maker's context
 
 ## Checks Re-Executed
 

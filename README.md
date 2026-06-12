@@ -254,7 +254,7 @@ Every loop stops with one of four reasons:
 And one rule above the four: **the maker never grades its own homework.**
 `success` is only legal with an approving `verdict.md` written by an
 independent verifier — a different model, a fresh read-only context, or a
-human. The stop claim itself is machine-checked (`check-stop-reason.mjs`).
+human. The stop claim is sanity-checked by `check-stop-reason.mjs` — a tripwire, not proof of authorship. The real guarantee is that a verdict's automated evidence is reproducible by anyone, so a faked verdict dies on the next independent re-run.
 
 A loop without stop rules is not autonomy. It is an expensive `while true`
 wearing a cape.

@@ -93,9 +93,27 @@
 - Why this patch: the capstone task requires a version bump to mark the 0.2.0 release and a dogfood loop that honestly stops escalated — the loop that implements "the maker never grades its own homework" cannot itself claim success
 - Next check: `node plugins/loopify/skills/loopify-run/scripts/check-stop-reason.mjs .loopify/loops/002-mandatory-verifier escalated`
 
+## Turn 11
+
+- Command: independent cross-model verification (Codie, GPT-5.4, Codex)
+- Result: REJECT — 2 blocking findings + 1 non-blocking (recorded in verdict.md, committed d20b023)
+- Failure observed: loop-directory.md missing the verification wording its own contract requires; the contract over-claimed that check-stop-reason proves independent authorship when it cannot; final-report understated the manual review surface
+- Patch: see Turn 12
+- Why this patch: the verifier rejected; on reject the maker remediates and re-verifies — it does not self-certify
+- Next check: round-2 independent verification
+
+## Turn 12
+
+- Command: Path A remediation — honest framing + doc gap fixes
+- Result: loop-directory.md gains verification wording; final-report corrected; loop-contract concept, independent-verification reference, verdict template + example, README, and failure-modes reframed so the checker is a tripwire and independence = reproducible automated evidence + a named independent judge + a self-declared provenance line; contract evidence map adds the honesty row
+- Failure observed: none — npm run quality green
+- Patch: documentation + template edits only; check-stop-reason.mjs unchanged (a static check cannot prove authorship by construction; a stronger string match would itself be a new over-claim)
+- Why this patch: the honest fix is to claim what is true (reproducible automated evidence + independent judge) and name the provenance assumption, not to fake enforcement
+- Next check: hand back to the independent verifier for round 2
+
 ## Final
 
 - Stop reason: escalated
 - Passing command: npm run quality
 - Evidence: all validators green incl. 16 verification smoke fixtures
-- Remaining caveats: verdict.md pending — awaiting independent verifier (a different model than the maker)
+- Remaining caveats: round-1 independent verdict was REJECT (d20b023); remediated via Path A; awaiting round-2 independent verdict — still escalated, the maker does not self-certify

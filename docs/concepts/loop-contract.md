@@ -86,6 +86,16 @@ approving verdict is an illegal stop claim (`check-stop-reason.mjs` exits 1).
 Same finding rejected twice → `escalated`; no verifier available →
 `escalated` (`cannot-verify`).
 
+What the check proves, and what it does not: `check-stop-reason.mjs` confirms
+that an approving `verdict.md` exists, names a verifier distinct from the maker,
+and that the gate re-runs green. It cannot prove *who authored* the verdict — a
+static check of a text file never can. The real guarantee has two parts: the
+automated evidence in a verdict is **reproducible** (anyone can re-run the gate
+on any machine, and a forged result dies the moment they do), and the judgment
+evidence (frame review, manual items) requires a **named independent judge**
+each time. The checker is a tripwire against sloppy self-certification;
+reproduction and an independent judge are the teeth.
+
 ## Example Evidence Map
 
 | Requirement | Evidence Class | Evidence |
