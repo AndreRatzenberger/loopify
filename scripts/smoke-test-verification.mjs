@@ -1,4 +1,4 @@
-import { mkdtempSync, mkdirSync, writeFileSync, existsSync, rmSync } from "node:fs";
+import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, existsSync, rmSync } from "node:fs";
 import { join } from "node:path";
 import { tmpdir } from "node:os";
 import { spawnSync } from "node:child_process";
@@ -95,12 +95,21 @@ try {
   const host = mkdtempSync(join(tmpdir(), "loopify-host-"));
   dirs.push(host);
   mkdirSync(join(host, ".codex"));
+  const agentPath = join(host, ".codex", "agents", "loop-verifier.toml");
   spawnSync("node", [EMIT, host], { encoding: "utf8" });
-  if (!existsSync(join(host, ".codex", "agents", "loop-verifier.toml"))) {
+  if (!existsSync(agentPath)) {
     throw new Error("emit-verifier-agent did not write the codex verifier");
   }
-  const second = spawnSync("node", [EMIT, host], { encoding: "utf8" });
-  if (!second.stdout.includes("exists, skipping")) {
+  // Idempotency is asserted on the filesystem invariant, NOT on captured
+  // subprocess stdout: an independent cross-model verifier on a different
+  // runtime saw empty captured stdout here, which made a stdout-string
+  // assertion fail even though the behavior was correct. The real guarantee
+  // is "an existing definition is never overwritten" — mark the file,
+  // re-emit, confirm the mark survives.
+  const marked = readFileSync(agentPath, "utf8") + "\n# sentinel: must survive re-emit\n";
+  writeFileSync(agentPath, marked);
+  spawnSync("node", [EMIT, host], { encoding: "utf8" });
+  if (readFileSync(agentPath, "utf8") !== marked) {
     throw new Error("emit-verifier-agent overwrote an existing definition");
   }
   console.log("ok: emit-verifier-agent host detection + idempotency");
