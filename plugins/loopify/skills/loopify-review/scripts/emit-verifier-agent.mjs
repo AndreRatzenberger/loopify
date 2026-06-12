@@ -16,6 +16,7 @@ yourself; exit codes are evidence, the maker's claims are not. Grade every
 Requirement Evidence Map row pass/fail/cannot-verify. Review the contract
 itself: if the evidence map no longer measures the objective, that is a
 finding even when every check is green. Your only write is verdict.md.
+Bash-equivalent command execution is available to re-run checks; sandbox_mode enforces read-only at the filesystem level.
 """
 `;
 
@@ -23,6 +24,10 @@ const claudeAgent = `---
 name: loopify-verifier
 description: Read-only Loopify verifier. Use to grade a loop folder's success claim against its Loop Contract. Writes only verdict.md.
 tools: Read, Glob, Grep, Bash
+# Bash is required to re-run quality-gate checks (exit codes are evidence).
+# The write constraint is prose-enforced only — no host-level filesystem lock
+# exists for Claude agents. The Codex variant uses sandbox_mode = "read-only"
+# for structural enforcement.
 ---
 
 You are the checker, not the maker — you never see the maker's conversation.
@@ -44,7 +49,7 @@ if (existsSync(join(root, ".claude"))) {
 
 if (targets.length === 0) {
   console.log("no host dir (.codex/ or .claude/) found in " + root);
-  console.log("prose fallback: spawn a fresh sub-agent with read+run-checks instructions; its only write is verdict.md");
+  console.log("prose fallback: spawn a fresh sub-agent that re-runs the contract's checks itself (exit codes are evidence), grades every Requirement Evidence Map row pass/fail/cannot-verify, and whose ONLY write is verdict.md in the loop folder");
   process.exit(0);
 }
 
@@ -54,7 +59,12 @@ for (const target of targets) {
     console.log(`exists, skipping: ${path}`);
     continue;
   }
-  mkdirSync(target.dir, { recursive: true });
-  writeFileSync(path, target.content);
-  console.log(`wrote ${target.host} verifier: ${path}`);
+  try {
+    mkdirSync(target.dir, { recursive: true });
+    writeFileSync(path, target.content);
+    console.log(`wrote ${target.host} verifier: ${path}`);
+  } catch (error) {
+    console.error(`error writing ${target.host} verifier to ${path}: ${error.message}`);
+    process.exitCode = 1;
+  }
 }
