@@ -19,6 +19,8 @@
 
 ## Allowed Changes
 
+Denied always: `verdict.md` — only the verifier writes it.
+
 ## Authority Boundaries
 
 ## Loop Procedure
@@ -26,6 +28,15 @@
 ## Stop Conditions
 
 ## Blocked Conditions
+
+## Verification
+
+- Verifier:
+- Independence level: cross-model | fresh-context | human
+- Verifier inputs: loop-contract.md, trace.md, the diff, quality gate output
+- Verifier authority: read everything in scope, re-run checks; writes ONLY verdict.md
+- Verdict location: ./verdict.md
+- Minimum independence for this loop:
 
 ## Trace Requirements
 

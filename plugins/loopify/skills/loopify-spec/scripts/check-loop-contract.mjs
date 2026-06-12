@@ -16,6 +16,7 @@ const headings = [
   "## Loop Procedure",
   "## Stop Conditions",
   "## Blocked Conditions",
+  "## Verification",
   "## Trace Requirements",
   "## Final Report Requirements",
 ];
