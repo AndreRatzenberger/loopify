@@ -198,7 +198,7 @@ The `loopify-spec -> loopify-bootstrap` edge is explicit. Say "bootstrap it" or
 | `loopify-run` | Executes a loop folder by checking, patching, rerunning, and tracing. |
 | `loopify-checks` | Turns vague requirements into honest evidence. |
 | `loopify-trace` | Keeps receipts across attempts. |
-| `loopify-review` | Audits contracts, traces, done claims, and residual risk. |
+| `loopify-review` | Audits contracts, traces, done claims, and residual risk — and acts as the independent verifier that writes `verdict.md`. |
 | `loopify-debug` | Rescues stuck loops before they become doom spirals. |
 | `loopify-demo` | Builds public-safe demo material packs. |
 | `loopify-codex-sdk` | Treats Codex SDK calls as actuators inside a larger loop. |
@@ -250,6 +250,11 @@ Every loop stops with one of four reasons:
 - `blocked`: the same blocker repeats or a required dependency is unavailable.
 - `escalated`: a human decision is required.
 - `budget-exhausted`: the contract's turn, time, retry, or cost budget is done.
+
+And one rule above the four: **the maker never grades its own homework.**
+`success` is only legal with an approving `verdict.md` written by an
+independent verifier — a different model, a fresh read-only context, or a
+human. The stop claim itself is machine-checked (`check-stop-reason.mjs`).
 
 A loop without stop rules is not autonomy. It is an expensive `while true`
 wearing a cape.

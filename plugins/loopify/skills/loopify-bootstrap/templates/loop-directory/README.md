@@ -14,3 +14,7 @@ Files:
 - `final-report.md`: stop reason and evidence summary.
 - `retro.md`: reusable lessons after completion.
 - `artifacts/`: screenshots, logs, recordings, exports, or other evidence.
+
+`verdict.md` appears at the end of the loop: it is written by the independent
+verifier (see the contract's Verification section), never by the maker.
+Validate stop claims with `check-stop-reason.mjs <this-folder> <reason>`.

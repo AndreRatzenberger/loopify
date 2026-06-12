@@ -24,6 +24,8 @@ Seed a repository with the files needed to run a goal loop.
 1. Read the Loop Contract or source spec.
 2. Inspect the repo stack using `references/repo-stack-detection.md`.
 3. Pick the next loop directory: `.loopify/loops/NNN-slug/`.
+   - Note in the loop README that `verdict.md` will be written by the
+     independent verifier at the end — the maker must not create it.
 4. Create or update `.loopify/index.md` with the new loop entry.
 5. Copy the source spec to `source.md` when available.
 6. Create or copy the Loop Contract to `loop-contract.md`.
