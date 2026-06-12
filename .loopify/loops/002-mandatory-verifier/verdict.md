@@ -1,9 +1,10 @@
 # Verdict
 
 - Loop: 002-mandatory-verifier
-- Verifier: Codie (GPT-5.4, Codex) - independent cross-model verifier
+- Verifier: Codie (GPT-5.4 via Codex)
 - Independence level: cross-model
 - Date: 2026-06-12
+- Provenance (self-declared, human-audited): produced in a separate Codex process by GPT-5.4/Codie, different model and agent identity from the maker "subagent-driven implementation session (Claude Fable 5)"; re-read source files and re-ran checks directly in the verifier worktree.
 
 ## Checks Re-Executed
 
@@ -21,31 +22,35 @@
 
 | Requirement | Evidence class | Verdict (pass / fail / cannot-verify) | Note |
 | --- | --- | --- | --- |
-| Plugin renamed to `loopify` | automated + manual | pass | `npm run quality` exit 0 includes manifest validation; `package.json`, `.claude-plugin/marketplace.json`, and `plugins/loopify/.claude-plugin/plugin.json` name `loopify`; `rg -n "loopify-agent-skills" package.json .claude-plugin/marketplace.json plugins scripts` returned no matches. Historical/spec/source mentions of the old name remain outside the operative manifest/skill/script surface. |
-| `## Verification` required in contracts | automated | pass | Direct contract check exited 0 with "Loop Contract headings passed"; `npm run quality` exit 0 includes `smoke:examples`. |
-| Example contracts carry `## Verification` | automated | pass | `npm run quality` exit 0 includes `smoke:examples`; the smoke script checks all heading-checked example contracts against `REQUIRED_CONTRACT_HEADINGS`. |
-| verdict.md template + example | automated | pass | `npm run quality` exit 0 includes `validate:skills` and `smoke:examples`; `plugins/loopify/skills/loopify-review/templates/verdict.md` exists and the simple-web-app example verdict contains the required verdict sections. |
-| emit-verifier-agent.mjs host adapter | automated | pass | `npm run quality` exit 0 includes `smoke:verification`, including the host detection and idempotency case. |
-| check-stop-reason.mjs - 16 fixtures | automated | pass | `npm run quality` exit 0 printed all 16 adversarial fixture results plus the emit idempotency check; direct stop checks also returned success=1 before verdict and escalated=0. |
-| loopify-run + loopify-review docs updated | manual | pass | `plugins/loopify/skills/loopify-run/SKILL.md`, `plugins/loopify/skills/loopify-run/references/loop-execution-protocol.md`, `plugins/loopify/skills/loopify-review/SKILL.md`, and `plugins/loopify/skills/loopify-review/references/independent-verification.md` describe the independent-verifier gate and `verdict.md` write boundary. |
-| concepts/README/failure-modes updated | manual | fail | `README.md`, `docs/concepts/loop-contract.md`, and `docs/concepts/failure-modes.md` contain mandatory-verification wording, but the contract's manual queue explicitly names `docs/concepts/loop-directory.md`; that file has no verifier/verdict/verification wording beyond a generic "stop reason" ledger line. |
+| Plugin renamed to `loopify` | automated + manual | pass | `npm run quality` exit 0 includes manifest validation; `package.json`, `.claude-plugin/marketplace.json`, and `plugins/loopify/.claude-plugin/plugin.json` name `loopify`. Operative manifests, skills, and scripts are under `plugins/loopify`; remaining `loopify-agent-skills` mentions are historical source/spec text or README migration guidance. |
+| `## Verification` required in contracts | automated | pass | Direct `check-loop-contract.mjs` on this loop contract exited 0; `npm run quality` exit 0 includes example contract smoke checks. |
+| Example contracts carry `## Verification` | automated | pass | `npm run quality` exit 0 includes `smoke:examples`, which checks the heading-checked example contracts against `REQUIRED_CONTRACT_HEADINGS`. |
+| verdict.md template + example | automated | pass | `validate:skills` requires `plugins/loopify/skills/loopify-review/templates/verdict.md`; `smoke:examples` checks the simple-web-app example verdict fields. |
+| emit-verifier-agent.mjs host adapter | automated | pass | `smoke:verification` includes host detection and idempotency coverage for `emit-verifier-agent.mjs`. |
+| check-stop-reason.mjs - 16 fixtures | automated | pass | `smoke:verification` ran the 16 adversarial fixtures named in the contract plus emit idempotency. Direct checks returned success=1 for the current escalated loop and escalated=0. |
+| loopify-run + loopify-review docs updated | manual | pass | `loopify-run` and its execution protocol forbid maker-written `verdict.md`, require independent verification before success, and route rejects/cannot-verify to escalation. `loopify-review` and `independent-verification.md` describe verifier mode, evidence re-runs, row grading, and the verdict write boundary. |
+| concepts/README/failure-modes updated | manual | pass | `docs/concepts/loop-directory.md`, `README.md`, `docs/concepts/loop-contract.md`, and `docs/concepts/failure-modes.md` now state mandatory verification, success gating by approving verdict, and/or escalation when independent verification is absent. |
+| Verification framing is honest (tripwire, not authorship proof) | manual | pass | Path A is acceptable: `docs/concepts/loop-contract.md`, `plugins/loopify/skills/loopify-review/references/independent-verification.md`, `docs/concepts/failure-modes.md`, the script comment, and the verdict template describe `check-stop-reason.mjs` as a tripwire, not proof of authorship; provenance is self-declared/human-audited, automated evidence is reproducible, and judgment evidence depends on a named independent judge. |
 
 ## Manual / Visual Queue
 
 - Reviewed loopify-run skill doc and loop execution protocol: pass.
 - Reviewed loopify-review skill doc and independent-verification reference: pass.
-- Reviewed README mandatory-verification wording: pass.
-- Reviewed docs/concepts/loop-contract.md mandatory-verification wording: pass.
-- Reviewed docs/concepts/failure-modes.md self-graded success / verifier capture wording: pass.
-- Reviewed docs/concepts/loop-directory.md because the contract names it: fail, missing mandatory-verification wording.
-- Visual review: none applicable.
+- Reviewed docs/concepts/loop-directory.md mandatory-verification wording: pass.
+- Reviewed README mandatory-verification/tripwire wording: pass.
+- Reviewed docs/concepts/loop-contract.md Verification Section: pass.
+- Reviewed docs/concepts/failure-modes.md Self-Graded Success, Verifier Capture, and Forgeable Verdict sections: pass.
+- Reviewed final-report.md manual / visual review line: pass.
+- Visual review: not applicable.
 
 ## Findings
 
-- Blocking - `docs/concepts/loop-directory.md` is missing the mandatory-verification wording required by the contract's manual review queue. The file is 72 lines and only mentions "stop reason" generically in the index description; it does not mention verifier, verification, verdict, or the rule that the maker cannot write `verdict.md`.
-- Blocking - `check-stop-reason.mjs` can be made to accept `success` with a syntactically valid but dishonest `verdict.md` written by the maker under a different verifier name. A throwaway `/tmp` fixture with `Maker: dishonest-maker`, `Verifier: claimed-independent-agent`, `## Overall` = `approve`, and a green `quality-gate.sh` exited 0. The script comments and design docs acknowledge that true independence depends on the out-of-band write-authority boundary, but the contract evidence map does not require evidence that this boundary was enforced.
-- Non-blocking but material - `.loopify/loops/002-mandatory-verifier/final-report.md` says "Manual / visual review: none required" even though the contract lists manual review items. The verifier re-reviewed those items here, but the maker's final report understates the required review surface.
+- No blocking findings in round 2.
+- Round-1 finding 1 is resolved: `docs/concepts/loop-directory.md` now has a "Verification and the verdict" section requiring an independent verifier, maker-denied `verdict.md`, approving verdict for `success`, `escalated` without one, and the tripwire limitation.
+- Round-1 finding 2 is resolved by honest framing, not stronger static enforcement. The throwaway `/tmp` forged different-name verdict still exited 0, but the docs now explicitly say that static checks cannot prove authorship and that provenance/process plus reproducible evidence are the real guarantee.
+- Round-1 finding 3 is resolved: `final-report.md` now says manual / visual review is required and reviewed by the independent verifier in `verdict.md`.
+- Residual caveat: `check-stop-reason.mjs` remains intentionally forgeable by a dishonest maker using a different verifier name. I do not consider this a defect after Path A because the limitation is now named in the contract-facing docs and verifier reference.
 
 ## Overall
 
-reject
+approve
